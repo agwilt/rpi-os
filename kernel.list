@@ -5,13 +5,21 @@ tmp/kernel.elf:     file format elf32-littlearm
 Disassembly of section .init:
 
 00008000 <_start>:
-    8000:	e59f0014 	ldr	r0, [pc, #20]	; 801c <loop$+0x4>
-    8004:	e3a01001 	mov	r1, #1
-    8008:	e1a01a81 	lsl	r1, r1, #21
-    800c:	e5801010 	str	r1, [r0, #16]
-    8010:	e3a01001 	mov	r1, #1
-    8014:	e1a01781 	lsl	r1, r1, #15
+    8000:	e59f002c 	ldr	r0, [pc, #44]	; 8034 <gpio_setmode$+0x4>
+    8004:	e3a02007 	mov	r2, #7
+    8008:	e1a02a82 	lsl	r2, r2, #21
+    800c:	e5901010 	ldr	r1, [r0, #16]
+    8010:	e1c11002 	bic	r1, r1, r2
+    8014:	e3a02001 	mov	r2, #1
+    8018:	e1a02a82 	lsl	r2, r2, #21
+    801c:	e0811002 	add	r1, r1, r2
+    8020:	e5803010 	str	r3, [r0, #16]
+    8024:	e3a01001 	mov	r1, #1
+    8028:	e1a01781 	lsl	r1, r1, #15
 
-00008018 <loop$>:
-    8018:	eafffffe 	b	8018 <loop$>
-    801c:	20200000 	eorcs	r0, r0, r0
+0000802c <loop$>:
+    802c:	eafffffe 	b	802c <loop$>
+
+00008030 <gpio_setmode$>:
+    8030:	e1a00000 	nop			; (mov r0, r0)
+    8034:	20200000 	eorcs	r0, r0, r0

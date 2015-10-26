@@ -7,19 +7,39 @@
 .globl _start
 _start:
 
-// sore GPIO controller address in r0
+// store GPIO controller address in r0
 ldr r0, =GPIO_BASE
 
-// next, enable output for pin 47 (001 is output, 000 input)
-mov r1, #GPIO_OUT
-lsl r1, #21
-// 4th set of GPIO words (GPIO_BASE+16 bytes)
-str r1, [r0, #16]
+
+//next, enable output for pin 47
+
+//mask to clear bits
+mov r2, #0b111
+lsl r2, #21
+//get relevant word, clear the right 3 bits
+ldr r1, [r0, #16]
+bic r1, r1, r2
+
+//number to write to word
+mov r2, #GPIO_OUT
+lsl r2, #21
+// and add prepared mode
+add r1, r2
+
+//now write it back to RAM
+str r3, [r0, #16]
+
 
 // get number to set pin 47
 mov r1, #1
 lsl r1, #15
 
+
+
 //loop for ever
 loop$:
 	b loop$
+
+// set mode for a GPIO pin. takes pin number (e.g. 47), mode (GPIO_IN/OUT)
+gpio_setmode$:
+	nop

@@ -14,18 +14,18 @@ Linker script and memory map
 
 LOAD tmp/main.o
 
-.init           0x0000000000008000       0x20
+.init           0x0000000000008000       0x38
  *(.init)
- .init          0x0000000000008000       0x20 tmp/main.o
+ .init          0x0000000000008000       0x38 tmp/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008020        0x0
+.text           0x0000000000008038        0x0
  *(.text)
- .text          0x0000000000008020        0x0 tmp/main.o
+ .text          0x0000000000008038        0x0 tmp/main.o
 
-.data           0x0000000000008020        0x0
+.data           0x0000000000008038        0x0
  *(.data)
- .data          0x0000000000008020        0x0 tmp/main.o
+ .data          0x0000000000008038        0x0 tmp/main.o
 
 /DISCARD/
  *(*)
