@@ -5,7 +5,5 @@ tmp/kernel.elf:     file format elf32-littlearm
 Disassembly of section .init:
 
 00008000 <_start>:
-    8000:	e3a00003 	mov	r0, #3
-
-00008004 <loop$>:
-    8004:	eafffffe 	b	8004 <loop$>
+    8000:	e51f0004 	ldr	r0, [pc, #-4]	; 8004 <_start+0x4>
+    8004:	20200000 	eorcs	r0, r0, r0
