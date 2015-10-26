@@ -1,0 +1,32 @@
+
+Discarded input sections
+
+ .bss           0x0000000000000000        0x0 tmp/main.o
+ .ARM.attributes
+                0x0000000000000000       0x14 tmp/main.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD tmp/main.o
+
+.init           0x0000000000008000        0x8
+ *(.init)
+ .init          0x0000000000008000        0x8 tmp/main.o
+                0x0000000000008000                _start
+
+.text           0x0000000000008008        0x0
+ *(.text)
+ .text          0x0000000000008008        0x0 tmp/main.o
+
+.data           0x0000000000008008        0x0
+ *(.data)
+ .data          0x0000000000008008        0x0 tmp/main.o
+
+/DISCARD/
+ *(*)
+OUTPUT(tmp/kernel.elf elf32-littlearm)
