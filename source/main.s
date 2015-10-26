@@ -1,5 +1,7 @@
 .set LED_PIN, 47
 .set GPIO_BASE, 0x20200000
+.set GPIO_OUT, 1
+.set GPIO_IN, 0
 
 .section .init
 .globl _start
@@ -9,7 +11,7 @@ _start:
 ldr r0, =GPIO_BASE
 
 // next, enable output for pin 47 (001 is output, 000 input)
-mov r1, #1
+mov r1, #GPIO_OUT
 lsl r1, #21
 // 4th set of GPIO words (GPIO_BASE+16 bytes)
 str r1, [r0, #16]
