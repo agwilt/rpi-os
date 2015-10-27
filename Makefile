@@ -75,6 +75,10 @@ $(TMP):
 # rebuild everything
 rebuild: clean all
 
+# install image to SD
+install:
+	cp build/kernel.img /run/media/andreas/boot/
+
 # aliases:
 list: $(LIST)
 nm: $(NM)
