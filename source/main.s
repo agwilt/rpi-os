@@ -13,29 +13,22 @@ bl gpio_set_function
 loop$:
 
 	/* switch on */
-	//str r1,[r0,#32]
 
 	mov r0, #LED_OK
 	mov r1, #GPIO_HIGH
 	bl gpio_output
 
-	mov r2,#0x3F0000
-	wait1$:
-		sub r2,#1
-		cmp r2,#0
-		bne wait1$
+	mov r0,#0x3F0000
+	bl sleep
+
 
 	/* switch off */
-	//str r1,[r0,#44]
 
 	mov r0, #LED_OK
 	mov r1, #GPIO_LOW
 	bl gpio_output
 
-	mov r2,#0x3F0000
-	wait2$:
-		sub r2,#1
-		cmp r2,#0
-		bne wait2$
+	mov r0,#0x3F0000
+	bl sleep
 
 	b loop$
