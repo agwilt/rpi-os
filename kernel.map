@@ -22,23 +22,23 @@ LOAD tmp/constants.o
 LOAD tmp/gpio.o
 LOAD tmp/main.o
 
-.init           0x0000000000008000       0x40
+.init           0x0000000000008000       0x48
  *(.init)
- .init          0x0000000000008000       0x40 tmp/main.o
+ .init          0x0000000000008000       0x48 tmp/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008040       0x34
+.text           0x0000000000008048       0x34
  *(.text)
- .text          0x0000000000008040        0x0 tmp/constants.o
- .text          0x0000000000008040       0x34 tmp/gpio.o
-                0x0000000000008040                gpio_set_function
- .text          0x0000000000008074        0x0 tmp/main.o
+ .text          0x0000000000008048        0x0 tmp/constants.o
+ .text          0x0000000000008048       0x34 tmp/gpio.o
+                0x0000000000008048                gpio_set_function
+ .text          0x000000000000807c        0x0 tmp/main.o
 
-.data           0x0000000000008074        0x0
+.data           0x000000000000807c        0x0
  *(.data)
- .data          0x0000000000008074        0x0 tmp/constants.o
- .data          0x0000000000008074        0x0 tmp/gpio.o
- .data          0x0000000000008074        0x0 tmp/main.o
+ .data          0x000000000000807c        0x0 tmp/constants.o
+ .data          0x000000000000807c        0x0 tmp/gpio.o
+ .data          0x000000000000807c        0x0 tmp/main.o
 
 /DISCARD/
  *(*)

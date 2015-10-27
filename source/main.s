@@ -4,9 +4,6 @@
 .globl _start
 _start:
 
-// store GPIO controller address in r0
-//ldr r0, =GPIO_BASE
-
 /*
 
 //next, enable output for pin 47
@@ -40,6 +37,8 @@ bl gpio_set_function
 mov r1, #1
 lsl r1, #15
 
+// store GPIO controller address in r0
+ldr r0, =GPIO_BASE
 
 
 //loop for ever
