@@ -11,3 +11,10 @@ sleep:
 		bne sleep_wait$
 
 	mov pc, lr
+
+.globl st_get_timestamp
+st_get_timestamp:
+	// put the timestamp in r0
+	ldr r0, =ST_CL
+	ldrd r0, r1, [r0]
+	mov pc, lr

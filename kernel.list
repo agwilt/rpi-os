@@ -5,7 +5,7 @@ tmp/kernel.elf:     file format elf32-littlearm
 Disassembly of section .init:
 
 00008000 <_start>:
-    8000:	ea000025 	b	809c <main>
+    8000:	ea000021 	b	808c <main>
 
 Disassembly of section .text:
 
@@ -51,43 +51,49 @@ Disassembly of section .text:
     8084:	20200028 	eorcs	r0, r0, r8, lsr #32
     8088:	2020001c 	eorcs	r0, r0, ip, lsl r0
 
-0000808c <sleep>:
-    808c:	e2400001 	sub	r0, r0, #1
-    8090:	e3500000 	cmp	r0, #0
-    8094:	1afffffc 	bne	808c <sleep>
-    8098:	e1a0f00e 	mov	pc, lr
+0000808c <main>:
+    808c:	e3a0d902 	mov	sp, #32768	; 0x8000
+    8090:	e3a0002f 	mov	r0, #47	; 0x2f
+    8094:	e3a01001 	mov	r1, #1
+    8098:	ebffffd9 	bl	8004 <gpio_set_function>
+    809c:	e3a00023 	mov	r0, #35	; 0x23
+    80a0:	e3a01001 	mov	r1, #1
+    80a4:	ebffffd6 	bl	8004 <gpio_set_function>
 
-0000809c <main>:
-    809c:	e3a0d902 	mov	sp, #32768	; 0x8000
-    80a0:	e3a0002f 	mov	r0, #47	; 0x2f
-    80a4:	e3a01001 	mov	r1, #1
-    80a8:	ebffffd5 	bl	8004 <gpio_set_function>
-    80ac:	e3a00023 	mov	r0, #35	; 0x23
-    80b0:	e3a01001 	mov	r1, #1
-    80b4:	ebffffd2 	bl	8004 <gpio_set_function>
+000080a8 <loop$>:
+    80a8:	e3a00023 	mov	r0, #35	; 0x23
+    80ac:	e3a01000 	mov	r1, #0
+    80b0:	ebffffe4 	bl	8048 <gpio_output>
+    80b4:	e3a0002f 	mov	r0, #47	; 0x2f
+    80b8:	e3a01000 	mov	r1, #0
+    80bc:	ebffffe1 	bl	8048 <gpio_output>
+    80c0:	e3a00603 	mov	r0, #3145728	; 0x300000
+    80c4:	eb00000f 	bl	8108 <sleep>
+    80c8:	e3a0002f 	mov	r0, #47	; 0x2f
+    80cc:	e3a01001 	mov	r1, #1
+    80d0:	ebffffdc 	bl	8048 <gpio_output>
+    80d4:	e3a00602 	mov	r0, #2097152	; 0x200000
+    80d8:	eb00000a 	bl	8108 <sleep>
+    80dc:	e3a00023 	mov	r0, #35	; 0x23
+    80e0:	e3a01001 	mov	r1, #1
+    80e4:	ebffffd7 	bl	8048 <gpio_output>
+    80e8:	e3a00603 	mov	r0, #3145728	; 0x300000
+    80ec:	eb000005 	bl	8108 <sleep>
+    80f0:	e3a0002f 	mov	r0, #47	; 0x2f
+    80f4:	e3a01000 	mov	r1, #0
+    80f8:	ebffffd2 	bl	8048 <gpio_output>
+    80fc:	e3a00602 	mov	r0, #2097152	; 0x200000
+    8100:	eb000000 	bl	8108 <sleep>
+    8104:	eaffffe7 	b	80a8 <loop$>
 
-000080b8 <loop$>:
-    80b8:	e3a00023 	mov	r0, #35	; 0x23
-    80bc:	e3a01000 	mov	r1, #0
-    80c0:	ebffffe0 	bl	8048 <gpio_output>
-    80c4:	e3a0002f 	mov	r0, #47	; 0x2f
-    80c8:	e3a01000 	mov	r1, #0
-    80cc:	ebffffdd 	bl	8048 <gpio_output>
-    80d0:	e3a00603 	mov	r0, #3145728	; 0x300000
-    80d4:	ebffffec 	bl	808c <sleep>
-    80d8:	e3a0002f 	mov	r0, #47	; 0x2f
-    80dc:	e3a01001 	mov	r1, #1
-    80e0:	ebffffd8 	bl	8048 <gpio_output>
-    80e4:	e3a00602 	mov	r0, #2097152	; 0x200000
-    80e8:	ebffffe7 	bl	808c <sleep>
-    80ec:	e3a00023 	mov	r0, #35	; 0x23
-    80f0:	e3a01001 	mov	r1, #1
-    80f4:	ebffffd3 	bl	8048 <gpio_output>
-    80f8:	e3a00603 	mov	r0, #3145728	; 0x300000
-    80fc:	ebffffe2 	bl	808c <sleep>
-    8100:	e3a0002f 	mov	r0, #47	; 0x2f
-    8104:	e3a01000 	mov	r1, #0
-    8108:	ebffffce 	bl	8048 <gpio_output>
-    810c:	e3a00602 	mov	r0, #2097152	; 0x200000
-    8110:	ebffffdd 	bl	808c <sleep>
-    8114:	eaffffe7 	b	80b8 <loop$>
+00008108 <sleep>:
+    8108:	e2400001 	sub	r0, r0, #1
+    810c:	e3500000 	cmp	r0, #0
+    8110:	1afffffc 	bne	8108 <sleep>
+    8114:	e1a0f00e 	mov	pc, lr
+
+00008118 <st_get_timestamp>:
+    8118:	e59f0004 	ldr	r0, [pc, #4]	; 8124 <st_get_timestamp+0xc>
+    811c:	e1c000d0 	ldrd	r0, [r0]
+    8120:	e1a0f00e 	mov	pc, lr
+    8124:	20003004 	andcs	r3, r0, r4

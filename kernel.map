@@ -7,12 +7,12 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 tmp/gpio.o
  .ARM.attributes
                 0x0000000000000000       0x14 tmp/gpio.o
- .bss           0x0000000000000000        0x0 tmp/misc.o
- .ARM.attributes
-                0x0000000000000000       0x14 tmp/misc.o
  .bss           0x0000000000000000        0x0 tmp/main.o
  .ARM.attributes
                 0x0000000000000000       0x14 tmp/main.o
+ .bss           0x0000000000000000        0x0 tmp/timer.o
+ .ARM.attributes
+                0x0000000000000000       0x14 tmp/timer.o
 
 Memory Configuration
 
@@ -23,30 +23,31 @@ Linker script and memory map
 
 LOAD tmp/constants.o
 LOAD tmp/gpio.o
-LOAD tmp/misc.o
 LOAD tmp/main.o
+LOAD tmp/timer.o
 
 .init           0x0000000000008000        0x4
  *(.init)
  .init          0x0000000000008000        0x4 tmp/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008004      0x114
+.text           0x0000000000008004      0x124
  *(.text)
  .text          0x0000000000008004        0x0 tmp/constants.o
  .text          0x0000000000008004       0x88 tmp/gpio.o
                 0x0000000000008004                gpio_set_function
                 0x0000000000008048                gpio_output
- .text          0x000000000000808c       0x10 tmp/misc.o
-                0x000000000000808c                sleep
- .text          0x000000000000809c       0x7c tmp/main.o
+ .text          0x000000000000808c       0x7c tmp/main.o
+ .text          0x0000000000008108       0x20 tmp/timer.o
+                0x0000000000008108                sleep
+                0x0000000000008118                st_get_timestamp
 
-.data           0x0000000000008118        0x0
+.data           0x0000000000008128        0x0
  *(.data)
- .data          0x0000000000008118        0x0 tmp/constants.o
- .data          0x0000000000008118        0x0 tmp/gpio.o
- .data          0x0000000000008118        0x0 tmp/misc.o
- .data          0x0000000000008118        0x0 tmp/main.o
+ .data          0x0000000000008128        0x0 tmp/constants.o
+ .data          0x0000000000008128        0x0 tmp/gpio.o
+ .data          0x0000000000008128        0x0 tmp/main.o
+ .data          0x0000000000008128        0x0 tmp/timer.o
 
 /DISCARD/
  *(*)
