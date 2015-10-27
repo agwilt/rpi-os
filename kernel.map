@@ -1,6 +1,9 @@
 
 Discarded input sections
 
+ .bss           0x0000000000000000        0x0 tmp/constants.o
+ .ARM.attributes
+                0x0000000000000000       0x14 tmp/constants.o
  .bss           0x0000000000000000        0x0 tmp/gpio.o
  .ARM.attributes
                 0x0000000000000000       0x14 tmp/gpio.o
@@ -15,6 +18,7 @@ Name             Origin             Length             Attributes
 
 Linker script and memory map
 
+LOAD tmp/constants.o
 LOAD tmp/gpio.o
 LOAD tmp/main.o
 
@@ -25,12 +29,14 @@ LOAD tmp/main.o
 
 .text           0x000000000000805c        0x4
  *(.text)
+ .text          0x000000000000805c        0x0 tmp/constants.o
  .text          0x000000000000805c        0x4 tmp/gpio.o
                 0x000000000000805c                gpio_setmode
  .text          0x0000000000008060        0x0 tmp/main.o
 
 .data           0x0000000000008060        0x0
  *(.data)
+ .data          0x0000000000008060        0x0 tmp/constants.o
  .data          0x0000000000008060        0x0 tmp/gpio.o
  .data          0x0000000000008060        0x0 tmp/main.o
 
