@@ -10,7 +10,16 @@ _start:
 // store GPIO controller address in r0
 ldr r0, =GPIO_BASE
 
+/* enable GPIO output for pin 47*/
+/* first we move 1 into r1. Then we shift it left, to get a nice, high number */
+mov r1,#1
+/* 21: 7x3. It's the 7th set of 3 bits */
+lsl r1,#21
+/* And it's the word that starts at GPIO+16 bytes */
+str r1,[r0,#16]
 
+
+/*
 //next, enable output for pin 47
 
 //mask to clear bits
@@ -28,7 +37,7 @@ add r1, r2
 
 //now write it back to RAM
 str r3, [r0, #16]
-
+*/
 
 // get number to set pin 47
 mov r1, #1
