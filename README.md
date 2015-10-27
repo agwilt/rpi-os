@@ -2,10 +2,10 @@
 
 For now, I'm assuming a Raspberry Pi B+, though I'll try to make this portable later.
 
-The code is under `source/`, and the binaries under `build/`.
+The code is under [`source/`](source/), and the binaries under [`build/`](build/).
 
 **Source files:**
-* `main.s`: the main file (containg `_start`).
-* `gpio.s`: subroutines for GPIO stuff
-* `misc.s`: miscellaneous functions
-* `constants.s`: useful constants for the assembler
+* [`main.s`](source/main.s): the main file (containg `_start`).
+* [`gpio.s`](source/gpio.s): subroutines for GPIO stuff
+* [`misc.s`](source/misc.s): miscellaneous functions
+* [`constants.s`](source/constants.s): useful constants for the assembler
