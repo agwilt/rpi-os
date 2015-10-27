@@ -26,27 +26,27 @@ LOAD tmp/gpio.o
 LOAD tmp/misc.o
 LOAD tmp/main.o
 
-.init           0x0000000000008000       0x78
+.init           0x0000000000008000        0x4
  *(.init)
- .init          0x0000000000008000       0x78 tmp/main.o
+ .init          0x0000000000008000        0x4 tmp/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008078       0x98
+.text           0x0000000000008004      0x114
  *(.text)
- .text          0x0000000000008078        0x0 tmp/constants.o
- .text          0x0000000000008078       0x88 tmp/gpio.o
-                0x0000000000008078                gpio_set_function
-                0x00000000000080bc                gpio_output
- .text          0x0000000000008100       0x10 tmp/misc.o
-                0x0000000000008100                sleep
- .text          0x0000000000008110        0x0 tmp/main.o
+ .text          0x0000000000008004        0x0 tmp/constants.o
+ .text          0x0000000000008004       0x88 tmp/gpio.o
+                0x0000000000008004                gpio_set_function
+                0x0000000000008048                gpio_output
+ .text          0x000000000000808c       0x10 tmp/misc.o
+                0x000000000000808c                sleep
+ .text          0x000000000000809c       0x7c tmp/main.o
 
-.data           0x0000000000008110        0x0
+.data           0x0000000000008118        0x0
  *(.data)
- .data          0x0000000000008110        0x0 tmp/constants.o
- .data          0x0000000000008110        0x0 tmp/gpio.o
- .data          0x0000000000008110        0x0 tmp/misc.o
- .data          0x0000000000008110        0x0 tmp/main.o
+ .data          0x0000000000008118        0x0 tmp/constants.o
+ .data          0x0000000000008118        0x0 tmp/gpio.o
+ .data          0x0000000000008118        0x0 tmp/misc.o
+ .data          0x0000000000008118        0x0 tmp/main.o
 
 /DISCARD/
  *(*)

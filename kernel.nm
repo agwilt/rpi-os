@@ -26,10 +26,10 @@
 00000001 a GPIO_OUT
 00000001 a GPIO_OUT
 00000001 a GPIO_OUT
-000080bc T gpio_output
-000080d4 t gpio_output_loop$
-00008078 T gpio_set_function
-00008088 t gpio_set_function_loop$
+00008048 T gpio_output
+00008060 t gpio_output_loop$
+00008004 T gpio_set_function
+00008014 t gpio_set_function_loop$
 2020001c a GPSET0
 2020001c a GPSET0
 2020001c a GPSET0
@@ -42,7 +42,8 @@
 00000023 a LED_PWR
 00000023 a LED_PWR
 00000023 a LED_PWR
-00008018 t loop$
-00008100 T sleep
-00008100 t sleep_wait$
+000080b8 t loop$
+0000809c t main
+0000808c T sleep
+0000808c t sleep_wait$
 00008000 T _start

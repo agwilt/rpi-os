@@ -5,85 +5,89 @@ tmp/kernel.elf:     file format elf32-littlearm
 Disassembly of section .init:
 
 00008000 <_start>:
-    8000:	e3a0002f 	mov	r0, #47	; 0x2f
-    8004:	e3a01001 	mov	r1, #1
-    8008:	eb00001a 	bl	8078 <gpio_set_function>
-    800c:	e3a00023 	mov	r0, #35	; 0x23
-    8010:	e3a01001 	mov	r1, #1
-    8014:	eb000017 	bl	8078 <gpio_set_function>
-
-00008018 <loop$>:
-    8018:	e3a00023 	mov	r0, #35	; 0x23
-    801c:	e3a01000 	mov	r1, #0
-    8020:	eb000025 	bl	80bc <gpio_output>
-    8024:	e3a0002f 	mov	r0, #47	; 0x2f
-    8028:	e3a01000 	mov	r1, #0
-    802c:	eb000022 	bl	80bc <gpio_output>
-    8030:	e3a00603 	mov	r0, #3145728	; 0x300000
-    8034:	eb000031 	bl	8100 <sleep>
-    8038:	e3a0002f 	mov	r0, #47	; 0x2f
-    803c:	e3a01001 	mov	r1, #1
-    8040:	eb00001d 	bl	80bc <gpio_output>
-    8044:	e3a00602 	mov	r0, #2097152	; 0x200000
-    8048:	eb00002c 	bl	8100 <sleep>
-    804c:	e3a00023 	mov	r0, #35	; 0x23
-    8050:	e3a01001 	mov	r1, #1
-    8054:	eb000018 	bl	80bc <gpio_output>
-    8058:	e3a00603 	mov	r0, #3145728	; 0x300000
-    805c:	eb000027 	bl	8100 <sleep>
-    8060:	e3a0002f 	mov	r0, #47	; 0x2f
-    8064:	e3a01000 	mov	r1, #0
-    8068:	eb000013 	bl	80bc <gpio_output>
-    806c:	e3a00602 	mov	r0, #2097152	; 0x200000
-    8070:	eb000022 	bl	8100 <sleep>
-    8074:	eaffffe7 	b	8018 <loop$>
+    8000:	ea000025 	b	809c <main>
 
 Disassembly of section .text:
 
-00008078 <gpio_set_function>:
-    8078:	e3500035 	cmp	r0, #53	; 0x35
-    807c:	93510007 	cmpls	r1, #7
-    8080:	81a0f00e 	movhi	pc, lr
-    8084:	e59f2068 	ldr	r2, [pc, #104]	; 80f4 <gpio_output_loop$+0x20>
+00008004 <gpio_set_function>:
+    8004:	e3500035 	cmp	r0, #53	; 0x35
+    8008:	93510007 	cmpls	r1, #7
+    800c:	81a0f00e 	movhi	pc, lr
+    8010:	e59f2068 	ldr	r2, [pc, #104]	; 8080 <gpio_output_loop$+0x20>
 
-00008088 <gpio_set_function_loop$>:
-    8088:	e3500009 	cmp	r0, #9
-    808c:	8240000a 	subhi	r0, r0, #10
-    8090:	82822004 	addhi	r2, r2, #4
-    8094:	8afffffb 	bhi	8088 <gpio_set_function_loop$>
-    8098:	e0800080 	add	r0, r0, r0, lsl #1
-    809c:	e3a03007 	mov	r3, #7
-    80a0:	e1a03013 	lsl	r3, r3, r0
-    80a4:	e1a01011 	lsl	r1, r1, r0
-    80a8:	e5920000 	ldr	r0, [r2]
-    80ac:	e1c00003 	bic	r0, r0, r3
-    80b0:	e0800001 	add	r0, r0, r1
-    80b4:	e5820000 	str	r0, [r2]
-    80b8:	e1a0f00e 	mov	pc, lr
+00008014 <gpio_set_function_loop$>:
+    8014:	e3500009 	cmp	r0, #9
+    8018:	8240000a 	subhi	r0, r0, #10
+    801c:	82822004 	addhi	r2, r2, #4
+    8020:	8afffffb 	bhi	8014 <gpio_set_function_loop$>
+    8024:	e0800080 	add	r0, r0, r0, lsl #1
+    8028:	e3a03007 	mov	r3, #7
+    802c:	e1a03013 	lsl	r3, r3, r0
+    8030:	e1a01011 	lsl	r1, r1, r0
+    8034:	e5920000 	ldr	r0, [r2]
+    8038:	e1c00003 	bic	r0, r0, r3
+    803c:	e0800001 	add	r0, r0, r1
+    8040:	e5820000 	str	r0, [r2]
+    8044:	e1a0f00e 	mov	pc, lr
 
-000080bc <gpio_output>:
-    80bc:	e3500035 	cmp	r0, #53	; 0x35
-    80c0:	93510001 	cmpls	r1, #1
-    80c4:	81a0f00e 	movhi	pc, lr
-    80c8:	e3510001 	cmp	r1, #1
-    80cc:	159f2024 	ldrne	r2, [pc, #36]	; 80f8 <gpio_output_loop$+0x24>
-    80d0:	059f2024 	ldreq	r2, [pc, #36]	; 80fc <gpio_output_loop$+0x28>
+00008048 <gpio_output>:
+    8048:	e3500035 	cmp	r0, #53	; 0x35
+    804c:	93510001 	cmpls	r1, #1
+    8050:	81a0f00e 	movhi	pc, lr
+    8054:	e3510001 	cmp	r1, #1
+    8058:	159f2024 	ldrne	r2, [pc, #36]	; 8084 <gpio_output_loop$+0x24>
+    805c:	059f2024 	ldreq	r2, [pc, #36]	; 8088 <gpio_output_loop$+0x28>
 
-000080d4 <gpio_output_loop$>:
-    80d4:	e350001f 	cmp	r0, #31
-    80d8:	82400020 	subhi	r0, r0, #32
-    80dc:	82822004 	addhi	r2, r2, #4
-    80e0:	8afffffb 	bhi	80d4 <gpio_output_loop$>
-    80e4:	e3a01001 	mov	r1, #1
-    80e8:	e1a01011 	lsl	r1, r1, r0
-    80ec:	e5821000 	str	r1, [r2]
-    80f0:	e1a0f00e 	mov	pc, lr
-    80f4:	20200000 	eorcs	r0, r0, r0
-    80f8:	20200028 	eorcs	r0, r0, r8, lsr #32
-    80fc:	2020001c 	eorcs	r0, r0, ip, lsl r0
+00008060 <gpio_output_loop$>:
+    8060:	e350001f 	cmp	r0, #31
+    8064:	82400020 	subhi	r0, r0, #32
+    8068:	82822004 	addhi	r2, r2, #4
+    806c:	8afffffb 	bhi	8060 <gpio_output_loop$>
+    8070:	e3a01001 	mov	r1, #1
+    8074:	e1a01011 	lsl	r1, r1, r0
+    8078:	e5821000 	str	r1, [r2]
+    807c:	e1a0f00e 	mov	pc, lr
+    8080:	20200000 	eorcs	r0, r0, r0
+    8084:	20200028 	eorcs	r0, r0, r8, lsr #32
+    8088:	2020001c 	eorcs	r0, r0, ip, lsl r0
 
-00008100 <sleep>:
-    8100:	e2400001 	sub	r0, r0, #1
-    8104:	e3500000 	cmp	r0, #0
-    8108:	1afffffc 	bne	8100 <sleep>
-    810c:	e1a0f00e 	mov	pc, lr
+0000808c <sleep>:
+    808c:	e2400001 	sub	r0, r0, #1
+    8090:	e3500000 	cmp	r0, #0
+    8094:	1afffffc 	bne	808c <sleep>
+    8098:	e1a0f00e 	mov	pc, lr
+
+0000809c <main>:
+    809c:	e3a0d902 	mov	sp, #32768	; 0x8000
+    80a0:	e3a0002f 	mov	r0, #47	; 0x2f
+    80a4:	e3a01001 	mov	r1, #1
+    80a8:	ebffffd5 	bl	8004 <gpio_set_function>
+    80ac:	e3a00023 	mov	r0, #35	; 0x23
+    80b0:	e3a01001 	mov	r1, #1
+    80b4:	ebffffd2 	bl	8004 <gpio_set_function>
+
+000080b8 <loop$>:
+    80b8:	e3a00023 	mov	r0, #35	; 0x23
+    80bc:	e3a01000 	mov	r1, #0
+    80c0:	ebffffe0 	bl	8048 <gpio_output>
+    80c4:	e3a0002f 	mov	r0, #47	; 0x2f
+    80c8:	e3a01000 	mov	r1, #0
+    80cc:	ebffffdd 	bl	8048 <gpio_output>
+    80d0:	e3a00603 	mov	r0, #3145728	; 0x300000
+    80d4:	ebffffec 	bl	808c <sleep>
+    80d8:	e3a0002f 	mov	r0, #47	; 0x2f
+    80dc:	e3a01001 	mov	r1, #1
+    80e0:	ebffffd8 	bl	8048 <gpio_output>
+    80e4:	e3a00602 	mov	r0, #2097152	; 0x200000
+    80e8:	ebffffe7 	bl	808c <sleep>
+    80ec:	e3a00023 	mov	r0, #35	; 0x23
+    80f0:	e3a01001 	mov	r1, #1
+    80f4:	ebffffd3 	bl	8048 <gpio_output>
+    80f8:	e3a00603 	mov	r0, #3145728	; 0x300000
+    80fc:	ebffffe2 	bl	808c <sleep>
+    8100:	e3a0002f 	mov	r0, #47	; 0x2f
+    8104:	e3a01000 	mov	r1, #0
+    8108:	ebffffce 	bl	8048 <gpio_output>
+    810c:	e3a00602 	mov	r0, #2097152	; 0x200000
+    8110:	ebffffdd 	bl	808c <sleep>
+    8114:	eaffffe7 	b	80b8 <loop$>

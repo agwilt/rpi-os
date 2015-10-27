@@ -3,6 +3,12 @@
 .section .init
 .globl _start
 _start:
+b main
+
+
+.section .text
+main:
+mov sp,#0x8000
 
 //enable output for the OK LED pin
 mov r0, #LED_OK				// set pin number
