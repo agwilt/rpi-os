@@ -38,6 +38,25 @@ lsl r1, #15
 
 //loop for ever
 loop$:
+
+	/* switch on */
+	str r1,[r0,#32]
+	mov r2,#0x3F0000
+
+	wait1$:
+		sub r2,#1
+		cmp r2,#0
+		bne wait1$
+
+	/* switch off */
+	str r1,[r0,#44]
+	mov r2,#0x3F0000
+
+	wait2$:
+		sub r2,#1
+		cmp r2,#0
+		bne wait2$
+
 	b loop$
 
 // set mode for a GPIO pin. takes pin number (e.g. 47), mode (GPIO_IN/OUT)
