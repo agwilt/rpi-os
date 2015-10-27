@@ -18,6 +18,7 @@ LOAD tmp/main.o
  *(.init)
  .init          0x0000000000008000       0x60 tmp/main.o
                 0x0000000000008000                _start
+                0x0000000000008058                gpio_setmode
 
 .text           0x0000000000008060        0x0
  *(.text)

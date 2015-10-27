@@ -1,4 +1,4 @@
-.set LED_PIN, 47
+.set LED_OK, 47
 .set GPIO_BASE, 0x20200000
 .set GPIO_OUT, 1
 .set GPIO_IN, 0
@@ -9,16 +9,6 @@ _start:
 
 // store GPIO controller address in r0
 ldr r0, =GPIO_BASE
-
-/*
-// enable GPIO output for pin 47
-// first we move 1 into r1. Then we shift it left, to get a nice, high number
-mov r1,#1
-// 21: 7x3. It's the 7th set of 3 bits
-lsl r1,#21
-// And it's the word that starts at GPIO+16 bytes
-str r1,[r0,#16]
-*/
 
 
 //next, enable output for pin 47
@@ -70,5 +60,8 @@ loop$:
 	b loop$
 
 // set mode for a GPIO pin. takes pin number (e.g. 47), mode (GPIO_IN/OUT)
-gpio_setmode$:
-	nop
+.globl gpio_setmode
+gpio_setmode:
+	// r0: pin number
+	// r1: mode
+	mov pc, lr
