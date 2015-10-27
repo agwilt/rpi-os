@@ -1,1 +1,1 @@
-Get pin mode setting function working
+Add timing function

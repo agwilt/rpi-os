@@ -16,11 +16,11 @@ gpio_set_function:
 	ldr r2, =GPIO_BASE
 
 	// next, separate pin number to 1's and 10's place
-	function_loop$:
+	gpio_set_function_loop$:
 		cmp r0, #9
 		subhi r0, #10
 		addhi r2, #4
-		bhi function_loop$
+		bhi gpio_set_function_loop$
 
 	// r0: pin number in word (0..9)
 	// r2: address of relevant word (0..5)
@@ -41,4 +41,34 @@ gpio_set_function:
 	str r0, [r2]
 
 	//return
+	mov pc, lr
+
+.globl gpio_output
+gpio_output:
+
+	// r0: pin number
+	// r1: state (1 set, 0 clear)
+
+	//exit if number or state are invalid
+	cmp r0, #GPIO_MAX_PIN
+	cmpls r1, #1
+	movhi pc, lr
+
+	// store set/clr base address in r2
+	cmp r1, #1
+	ldrne r2, =GPCLR0		// state is 0, so clear pin
+	ldreq r2, =GPSET0		// state is 1, so set pin
+
+	gpio_output_loop$:
+		cmp r0, #31
+		subhi r0, #32
+		addhi r2, #4
+		bhi gpio_output_loop$
+
+	// write (1 << pin) to the address
+	mov r1, #1
+	lsl r1, r0
+	str r1, [r2]
+
+	// return
 	mov pc, lr

@@ -8,27 +8,27 @@ Disassembly of section .init:
     8000:	e3a0002f 	mov	r0, #47	; 0x2f
     8004:	e3a01001 	mov	r1, #1
     8008:	eb00000e 	bl	8048 <gpio_set_function>
-    800c:	e3a01001 	mov	r1, #1
-    8010:	e1a01781 	lsl	r1, r1, #15
-    8014:	e59f0028 	ldr	r0, [pc, #40]	; 8044 <wait2$+0x10>
 
-00008018 <loop$>:
-    8018:	e5801020 	str	r1, [r0, #32]
-    801c:	e3a0283f 	mov	r2, #4128768	; 0x3f0000
+0000800c <loop$>:
+    800c:	e3a0002f 	mov	r0, #47	; 0x2f
+    8010:	e3a01001 	mov	r1, #1
+    8014:	eb00001c 	bl	808c <gpio_output>
+    8018:	e3a0283f 	mov	r2, #4128768	; 0x3f0000
 
-00008020 <wait1$>:
-    8020:	e2422001 	sub	r2, r2, #1
-    8024:	e3520000 	cmp	r2, #0
-    8028:	1afffffc 	bne	8020 <wait1$>
-    802c:	e580102c 	str	r1, [r0, #44]	; 0x2c
-    8030:	e3a0283f 	mov	r2, #4128768	; 0x3f0000
+0000801c <wait1$>:
+    801c:	e2422001 	sub	r2, r2, #1
+    8020:	e3520000 	cmp	r2, #0
+    8024:	1afffffc 	bne	801c <wait1$>
+    8028:	e3a0002f 	mov	r0, #47	; 0x2f
+    802c:	e3a01000 	mov	r1, #0
+    8030:	eb000015 	bl	808c <gpio_output>
+    8034:	e3a0283f 	mov	r2, #4128768	; 0x3f0000
 
-00008034 <wait2$>:
-    8034:	e2422001 	sub	r2, r2, #1
-    8038:	e3520000 	cmp	r2, #0
-    803c:	1afffffc 	bne	8034 <wait2$>
-    8040:	eafffff4 	b	8018 <loop$>
-    8044:	20200000 	eorcs	r0, r0, r0
+00008038 <wait2$>:
+    8038:	e2422001 	sub	r2, r2, #1
+    803c:	e3520000 	cmp	r2, #0
+    8040:	1afffffc 	bne	8038 <wait2$>
+    8044:	eafffff0 	b	800c <loop$>
 
 Disassembly of section .text:
 
@@ -36,13 +36,13 @@ Disassembly of section .text:
     8048:	e3500035 	cmp	r0, #53	; 0x35
     804c:	93510007 	cmpls	r1, #7
     8050:	81a0f00e 	movhi	pc, lr
-    8054:	e59f2030 	ldr	r2, [pc, #48]	; 808c <function_loop$+0x34>
+    8054:	e59f2068 	ldr	r2, [pc, #104]	; 80c4 <gpio_output_loop$+0x20>
 
-00008058 <function_loop$>:
+00008058 <gpio_set_function_loop$>:
     8058:	e3500009 	cmp	r0, #9
     805c:	8240000a 	subhi	r0, r0, #10
     8060:	82822004 	addhi	r2, r2, #4
-    8064:	8afffffb 	bhi	8058 <function_loop$>
+    8064:	8afffffb 	bhi	8058 <gpio_set_function_loop$>
     8068:	e0800080 	add	r0, r0, r0, lsl #1
     806c:	e3a03007 	mov	r3, #7
     8070:	e1a03013 	lsl	r3, r3, r0
@@ -52,4 +52,24 @@ Disassembly of section .text:
     8080:	e0800001 	add	r0, r0, r1
     8084:	e5820000 	str	r0, [r2]
     8088:	e1a0f00e 	mov	pc, lr
-    808c:	20200000 	eorcs	r0, r0, r0
+
+0000808c <gpio_output>:
+    808c:	e3500035 	cmp	r0, #53	; 0x35
+    8090:	93510001 	cmpls	r1, #1
+    8094:	81a0f00e 	movhi	pc, lr
+    8098:	e3510001 	cmp	r1, #1
+    809c:	159f2024 	ldrne	r2, [pc, #36]	; 80c8 <gpio_output_loop$+0x24>
+    80a0:	059f2024 	ldreq	r2, [pc, #36]	; 80cc <gpio_output_loop$+0x28>
+
+000080a4 <gpio_output_loop$>:
+    80a4:	e350001f 	cmp	r0, #31
+    80a8:	82400020 	subhi	r0, r0, #32
+    80ac:	82822004 	addhi	r2, r2, #4
+    80b0:	8afffffb 	bhi	80a4 <gpio_output_loop$>
+    80b4:	e3a01001 	mov	r1, #1
+    80b8:	e1a01011 	lsl	r1, r1, r0
+    80bc:	e5821000 	str	r1, [r2]
+    80c0:	e1a0f00e 	mov	pc, lr
+    80c4:	20200000 	eorcs	r0, r0, r0
+    80c8:	20200028 	eorcs	r0, r0, r8, lsr #32
+    80cc:	2020001c 	eorcs	r0, r0, ip, lsl r0
