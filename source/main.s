@@ -5,8 +5,9 @@
 _start:
 
 // store GPIO controller address in r0
-ldr r0, =GPIO_BASE
+//ldr r0, =GPIO_BASE
 
+/*
 
 //next, enable output for pin 47
 
@@ -23,9 +24,17 @@ mov r2, #GPIO_OUT
 lsl r2, #21
 // and add prepared mode
 add r1, r2
+// TODO: add r1, r2, lsl #21
 
 //now write it back to RAM
 str r1, [r0, #16]
+
+*/
+
+//enable output for pin 47
+mov r0, #47
+mov r1, #GPIO_OUT
+bl gpio_set_function
 
 // get number to set pin 47
 mov r1, #1

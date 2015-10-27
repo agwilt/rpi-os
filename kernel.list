@@ -5,37 +5,44 @@ tmp/kernel.elf:     file format elf32-littlearm
 Disassembly of section .init:
 
 00008000 <_start>:
-    8000:	e59f0050 	ldr	r0, [pc, #80]	; 8058 <wait2$+0x10>
-    8004:	e3a02007 	mov	r2, #7
-    8008:	e1a02a82 	lsl	r2, r2, #21
-    800c:	e5901010 	ldr	r1, [r0, #16]
-    8010:	e1c11002 	bic	r1, r1, r2
-    8014:	e3a02001 	mov	r2, #1
-    8018:	e1a02a82 	lsl	r2, r2, #21
-    801c:	e0811002 	add	r1, r1, r2
-    8020:	e5801010 	str	r1, [r0, #16]
-    8024:	e3a01001 	mov	r1, #1
-    8028:	e1a01781 	lsl	r1, r1, #15
+    8000:	e3a0002f 	mov	r0, #47	; 0x2f
+    8004:	e3a01001 	mov	r1, #1
+    8008:	eb00000c 	bl	8040 <gpio_set_function>
+    800c:	e3a01001 	mov	r1, #1
+    8010:	e1a01781 	lsl	r1, r1, #15
 
-0000802c <loop$>:
-    802c:	e5801020 	str	r1, [r0, #32]
-    8030:	e3a0283f 	mov	r2, #4128768	; 0x3f0000
+00008014 <loop$>:
+    8014:	e5801020 	str	r1, [r0, #32]
+    8018:	e3a0283f 	mov	r2, #4128768	; 0x3f0000
 
-00008034 <wait1$>:
-    8034:	e2422001 	sub	r2, r2, #1
-    8038:	e3520000 	cmp	r2, #0
-    803c:	1afffffc 	bne	8034 <wait1$>
-    8040:	e580102c 	str	r1, [r0, #44]	; 0x2c
-    8044:	e3a0283f 	mov	r2, #4128768	; 0x3f0000
+0000801c <wait1$>:
+    801c:	e2422001 	sub	r2, r2, #1
+    8020:	e3520000 	cmp	r2, #0
+    8024:	1afffffc 	bne	801c <wait1$>
+    8028:	e580102c 	str	r1, [r0, #44]	; 0x2c
+    802c:	e3a0283f 	mov	r2, #4128768	; 0x3f0000
 
-00008048 <wait2$>:
-    8048:	e2422001 	sub	r2, r2, #1
-    804c:	e3520000 	cmp	r2, #0
-    8050:	1afffffc 	bne	8048 <wait2$>
-    8054:	eafffff4 	b	802c <loop$>
-    8058:	20200000 	eorcs	r0, r0, r0
+00008030 <wait2$>:
+    8030:	e2422001 	sub	r2, r2, #1
+    8034:	e3520000 	cmp	r2, #0
+    8038:	1afffffc 	bne	8030 <wait2$>
+    803c:	eafffff4 	b	8014 <loop$>
 
 Disassembly of section .text:
 
-0000805c <gpio_setmode>:
-    805c:	e1a0f00e 	mov	pc, lr
+00008040 <gpio_set_function>:
+    8040:	e3500035 	cmp	r0, #53	; 0x35
+    8044:	93510007 	cmpls	r1, #7
+    8048:	81a0f00e 	movhi	pc, lr
+    804c:	e59f201c 	ldr	r2, [pc, #28]	; 8070 <function_loop$+0x20>
+
+00008050 <function_loop$>:
+    8050:	e3500009 	cmp	r0, #9
+    8054:	8240000a 	subhi	r0, r0, #10
+    8058:	82822004 	addhi	r2, r2, #4
+    805c:	8afffffb 	bhi	8050 <function_loop$>
+    8060:	e0800080 	add	r0, r0, r0, lsl #1
+    8064:	e1a01011 	lsl	r1, r1, r0
+    8068:	e5821000 	str	r1, [r2]
+    806c:	e1a0f00e 	mov	pc, lr
+    8070:	20200000 	eorcs	r0, r0, r0
