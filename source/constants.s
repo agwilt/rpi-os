@@ -1,4 +1,5 @@
 .set LED_OK, 47
+.set LED_PWR, 35
 
 .set GPSET0, 0x2020001c			// first pin setting word
 .set GPCLR0, 0x20200028			// first pin clearing word
