@@ -4,30 +4,6 @@
 .globl _start
 _start:
 
-/*
-
-//next, enable output for pin 47
-
-//mask to clear bits
-mov r2, #0b111
-lsl r2, #21
-//get relevant word, clear the right 3 bits
-ldr r1, [r0, #16]
-bic r1, r1, r2
-// r1 now contains the word with 3 bits cleared
-
-//number to write to word
-mov r2, #GPIO_OUT
-lsl r2, #21
-// and add prepared mode
-add r1, r2
-// TODO: add r1, r2, lsl #21
-
-//now write it back to RAM
-str r1, [r0, #16]
-
-*/
-
 //enable output for pin 47
 mov r0, #47
 mov r1, #GPIO_OUT
