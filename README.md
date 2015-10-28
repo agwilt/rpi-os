@@ -3,7 +3,7 @@
 For now, I'm assuming a Raspberry Pi B+, though I'll try to make this portable later.
 
 The code is under [`source/`](source/), and the binaries under [`build/`](build/).
-Fir a rough plan, see [TODO](TODO)
+For a rough plan, see [TODO](TODO.md)
 
 **Source files:**
 * [`main.s`](source/main.s): the main file (containg `_start`).
