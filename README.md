@@ -5,6 +5,8 @@ For now, I'm assuming a Raspberry Pi B+, though I'll try to make this portable l
 The code is under [`source/`](source/), and the binaries under [`build/`](build/).
 For a rough plan, see [TODO](TODO.md)
 
+A Video:[![Blink!](http://img.youtube.com/vi/yJaX_SZM4kE/0.jpg)](https://www.youtube.com/watch?v=yJaX_SZM4kE)
+
 **Source files:**
 * [`main.s`](source/main.s): the main file (containg `_start`).
 * [`gpio.s`](source/gpio.s): subroutines for GPIO stuff
