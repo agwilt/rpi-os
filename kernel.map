@@ -31,23 +31,24 @@ LOAD tmp/timer.o
  .init          0x0000000000008000        0x4 tmp/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008004      0x124
+.text           0x0000000000008004      0x150
  *(.text)
  .text          0x0000000000008004        0x0 tmp/constants.o
- .text          0x0000000000008004       0x88 tmp/gpio.o
+ .text          0x0000000000008004       0xb4 tmp/gpio.o
                 0x0000000000008004                gpio_set_function
                 0x0000000000008048                gpio_output
- .text          0x000000000000808c       0x7c tmp/main.o
- .text          0x0000000000008108       0x20 tmp/timer.o
-                0x0000000000008108                sleep
-                0x0000000000008118                st_get_timestamp
+                0x0000000000008080                gpio_blink
+ .text          0x00000000000080b8       0x7c tmp/main.o
+ .text          0x0000000000008134       0x20 tmp/timer.o
+                0x0000000000008134                sleep
+                0x0000000000008144                st_get_timestamp
 
-.data           0x0000000000008128        0x0
+.data           0x0000000000008154        0x0
  *(.data)
- .data          0x0000000000008128        0x0 tmp/constants.o
- .data          0x0000000000008128        0x0 tmp/gpio.o
- .data          0x0000000000008128        0x0 tmp/main.o
- .data          0x0000000000008128        0x0 tmp/timer.o
+ .data          0x0000000000008154        0x0 tmp/constants.o
+ .data          0x0000000000008154        0x0 tmp/gpio.o
+ .data          0x0000000000008154        0x0 tmp/main.o
+ .data          0x0000000000008154        0x0 tmp/timer.o
 
 /DISCARD/
  *(*)

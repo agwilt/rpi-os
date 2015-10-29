@@ -72,3 +72,29 @@ gpio_output:
 
 	// return
 	mov pc, lr
+
+.globl gpio_blink
+gpio_blink:
+
+	// r0: pin number
+	// r1: duration
+
+	push {lr}
+
+	// turn on pin
+	mov r2, r1				// duration
+	mov r1, #1
+	bl gpio_output
+
+	// wait
+	mov r3, r0				// pin number
+	mov r0, r2				// duration
+	bl sleep
+
+	// turn off pin
+	mov r0, r3				// pin number
+	mov r1, #0
+	bl gpio_output
+
+	//return
+	pop {pc}
