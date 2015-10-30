@@ -101,20 +101,19 @@ Disassembly of section .text:
     8134:	000186a0 	andeq	r8, r1, r0, lsr #13
 
 00008138 <sleep>:
-    8138:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-    813c:	e1a02000 	mov	r2, r0
-    8140:	eb000005 	bl	815c <st_get_timestamp>
-    8144:	e1a03000 	mov	r3, r0
+    8138:	e59f2024 	ldr	r2, [pc, #36]	; 8164 <st_get_timestamp+0xc>
+    813c:	e5922000 	ldr	r2, [r2]
 
-00008148 <sleep_loop$>:
-    8148:	eb000003 	bl	815c <st_get_timestamp>
-    814c:	e0401003 	sub	r1, r0, r3
-    8150:	e1510002 	cmp	r1, r2
-    8154:	9afffffb 	bls	8148 <sleep_loop$>
-    8158:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+00008140 <sleep_loop$>:
+    8140:	e59f101c 	ldr	r1, [pc, #28]	; 8164 <st_get_timestamp+0xc>
+    8144:	e5911000 	ldr	r1, [r1]
+    8148:	e0411002 	sub	r1, r1, r2
+    814c:	e1510000 	cmp	r1, r0
+    8150:	9afffffa 	bls	8140 <sleep_loop$>
+    8154:	e1a0f00e 	mov	pc, lr
 
-0000815c <st_get_timestamp>:
-    815c:	e59f0004 	ldr	r0, [pc, #4]	; 8168 <st_get_timestamp+0xc>
-    8160:	e1c000d0 	ldrd	r0, [r0]
-    8164:	e1a0f00e 	mov	pc, lr
-    8168:	20003004 	andcs	r3, r0, r4
+00008158 <st_get_timestamp>:
+    8158:	e59f0004 	ldr	r0, [pc, #4]	; 8164 <st_get_timestamp+0xc>
+    815c:	e1c000d0 	ldrd	r0, [r0]
+    8160:	e1a0f00e 	mov	pc, lr
+    8164:	20003004 	andcs	r3, r0, r4
