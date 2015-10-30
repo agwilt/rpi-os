@@ -7,6 +7,7 @@
 .set GPIO_OUT, 1
 .set GPSET0, 0x2020001c			// first pin setting word
 
+.set LED_ACT, LED_OK
 .set LED_OK, 47
 .set LED_PWR, 35
 
