@@ -89,7 +89,7 @@ gpio_blink:
 
 	// wait
 	pop {r0}				// duration
-	bl sleep
+	bl st_sleep
 
 	// turn off pin
 	mov r0, r3				// pin number

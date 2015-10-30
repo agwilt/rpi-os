@@ -34,7 +34,7 @@ loop$:
 	bl gpio_output
 
 	ldr r0,=200000
-	bl sleep
+	bl st_sleep
 
 	/* OK on */
 
@@ -43,7 +43,7 @@ loop$:
 	bl gpio_output
 
 	ldr r0,=200000
-	bl sleep
+	bl st_sleep
 
 	/* both on */
 
@@ -52,7 +52,7 @@ loop$:
 	bl gpio_output
 
 	ldr r0,=200000
-	bl sleep
+	bl st_sleep
 
 	/* PWR on */
 
@@ -61,6 +61,6 @@ loop$:
 	bl gpio_output
 
 	ldr r0,=200000
-	bl sleep
+	bl st_sleep
 
 	b loop$

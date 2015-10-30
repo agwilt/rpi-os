@@ -1,7 +1,7 @@
 .include "constants.s"
 
-.globl sleep
-sleep:
+.globl st_sleep
+st_sleep:
 	// r0: number of μSeconds to sleep
 
 	ldr r2, =ST_CL

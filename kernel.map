@@ -40,7 +40,7 @@ LOAD tmp/timer.o
                 0x0000000000008080                gpio_blink
  .text          0x00000000000080b8       0x80 tmp/main.o
  .text          0x0000000000008138       0x30 tmp/timer.o
-                0x0000000000008138                sleep
+                0x0000000000008138                st_sleep
                 0x0000000000008158                st_get_timestamp
 
 .data           0x0000000000008168        0x0
