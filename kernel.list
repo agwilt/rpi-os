@@ -55,7 +55,7 @@ Disassembly of section .text:
     808c:	ebffffed 	bl	8048 <gpio_output>
     8090:	e1a03000 	mov	r3, r0
     8094:	e1a00002 	mov	r0, r2
-    8098:	eb000025 	bl	8134 <sleep>
+    8098:	eb000026 	bl	8138 <sleep>
     809c:	e1a00003 	mov	r0, r3
     80a0:	e3a01000 	mov	r1, #0
     80a4:	ebffffe7 	bl	8048 <gpio_output>
@@ -80,33 +80,41 @@ Disassembly of section .text:
     80e0:	e3a0002f 	mov	r0, #47	; 0x2f
     80e4:	e3a01000 	mov	r1, #0
     80e8:	ebffffd6 	bl	8048 <gpio_output>
-    80ec:	e3a00603 	mov	r0, #3145728	; 0x300000
-    80f0:	eb00000f 	bl	8134 <sleep>
+    80ec:	e59f0040 	ldr	r0, [pc, #64]	; 8134 <loop$+0x60>
+    80f0:	eb000010 	bl	8138 <sleep>
     80f4:	e3a0002f 	mov	r0, #47	; 0x2f
     80f8:	e3a01001 	mov	r1, #1
     80fc:	ebffffd1 	bl	8048 <gpio_output>
-    8100:	e3a00602 	mov	r0, #2097152	; 0x200000
-    8104:	eb00000a 	bl	8134 <sleep>
+    8100:	e59f002c 	ldr	r0, [pc, #44]	; 8134 <loop$+0x60>
+    8104:	eb00000b 	bl	8138 <sleep>
     8108:	e3a00023 	mov	r0, #35	; 0x23
     810c:	e3a01001 	mov	r1, #1
     8110:	ebffffcc 	bl	8048 <gpio_output>
-    8114:	e3a00603 	mov	r0, #3145728	; 0x300000
-    8118:	eb000005 	bl	8134 <sleep>
+    8114:	e59f0018 	ldr	r0, [pc, #24]	; 8134 <loop$+0x60>
+    8118:	eb000006 	bl	8138 <sleep>
     811c:	e3a0002f 	mov	r0, #47	; 0x2f
     8120:	e3a01000 	mov	r1, #0
     8124:	ebffffc7 	bl	8048 <gpio_output>
-    8128:	e3a00602 	mov	r0, #2097152	; 0x200000
-    812c:	eb000000 	bl	8134 <sleep>
+    8128:	e59f0004 	ldr	r0, [pc, #4]	; 8134 <loop$+0x60>
+    812c:	eb000001 	bl	8138 <sleep>
     8130:	eaffffe7 	b	80d4 <loop$>
+    8134:	000186a0 	andeq	r8, r1, r0, lsr #13
 
-00008134 <sleep>:
-    8134:	e2400001 	sub	r0, r0, #1
-    8138:	e3500000 	cmp	r0, #0
-    813c:	1afffffc 	bne	8134 <sleep>
-    8140:	e1a0f00e 	mov	pc, lr
+00008138 <sleep>:
+    8138:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+    813c:	e1a02000 	mov	r2, r0
+    8140:	eb000005 	bl	815c <st_get_timestamp>
+    8144:	e1a03000 	mov	r3, r0
 
-00008144 <st_get_timestamp>:
-    8144:	e59f0004 	ldr	r0, [pc, #4]	; 8150 <st_get_timestamp+0xc>
-    8148:	e1c000d0 	ldrd	r0, [r0]
-    814c:	e1a0f00e 	mov	pc, lr
-    8150:	20003004 	andcs	r3, r0, r4
+00008148 <sleep_loop$>:
+    8148:	eb000003 	bl	815c <st_get_timestamp>
+    814c:	e0401003 	sub	r1, r0, r3
+    8150:	e1510002 	cmp	r1, r2
+    8154:	9afffffb 	bls	8148 <sleep_loop$>
+    8158:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+0000815c <st_get_timestamp>:
+    815c:	e59f0004 	ldr	r0, [pc, #4]	; 8168 <st_get_timestamp+0xc>
+    8160:	e1c000d0 	ldrd	r0, [r0]
+    8164:	e1a0f00e 	mov	pc, lr
+    8168:	20003004 	andcs	r3, r0, r4

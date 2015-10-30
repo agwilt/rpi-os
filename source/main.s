@@ -33,7 +33,7 @@ loop$:
 	mov r1, #GPIO_LOW
 	bl gpio_output
 
-	mov r0,#0x300000
+	ldr r0,=100000
 	bl sleep
 
 	/* OK on */
@@ -42,7 +42,7 @@ loop$:
 	mov r1, #GPIO_HIGH
 	bl gpio_output
 
-	mov r0,#0x200000
+	ldr r0,=100000
 	bl sleep
 
 	/* both on */
@@ -51,7 +51,7 @@ loop$:
 	mov r1, #GPIO_HIGH
 	bl gpio_output
 
-	mov r0,#0x300000
+	ldr r0,=100000
 	bl sleep
 
 	/* PWR on */
@@ -60,7 +60,7 @@ loop$:
 	mov r1, #GPIO_LOW
 	bl gpio_output
 
-	mov r0,#0x200000
+	ldr r0,=100000
 	bl sleep
 
 	b loop$
