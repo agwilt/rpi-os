@@ -82,18 +82,18 @@ gpio_blink:
 	push {lr}
 
 	// turn on pin
-	mov r2, r1				// duration
-	mov r1, #1
+	mov r3, r0				// pin number
+	push {r1}				// duration
+	mov r1, #GPIO_HIGH
 	bl gpio_output
 
 	// wait
-	mov r3, r0				// pin number
-	mov r0, r2				// duration
+	pop {r0}				// duration
 	bl sleep
 
 	// turn off pin
 	mov r0, r3				// pin number
-	mov r1, #0
+	mov r1, #GPIO_LOW
 	bl gpio_output
 
 	//return
