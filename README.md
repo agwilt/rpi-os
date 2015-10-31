@@ -1,4 +1,6 @@
-# Bare metal assembly project for my Pi
+# ServOS
+
+A bare metal system to (ultimately) control servos, though at the moment it can only do stuff like blink and morse.
 
 For now, I'm assuming a Raspberry Pi B+, though I'll try to make this portable later.
 
