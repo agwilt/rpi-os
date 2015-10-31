@@ -7,6 +7,9 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 tmp/constants.o
  .ARM.attributes
                 0x0000000000000000       0x14 tmp/constants.o
+ .bss           0x0000000000000000        0x0 tmp/constants_b.o
+ .ARM.attributes
+                0x0000000000000000       0x14 tmp/constants_b.o
  .bss           0x0000000000000000        0x0 tmp/gpio.o
  .ARM.attributes
                 0x0000000000000000       0x14 tmp/gpio.o
@@ -26,6 +29,7 @@ Linker script and memory map
 
 LOAD tmp/constants_bplus.o
 LOAD tmp/constants.o
+LOAD tmp/constants_b.o
 LOAD tmp/gpio.o
 LOAD tmp/main.o
 LOAD tmp/timer.o
@@ -39,6 +43,7 @@ LOAD tmp/timer.o
  *(.text)
  .text          0x0000000000008004        0x0 tmp/constants_bplus.o
  .text          0x0000000000008004        0x0 tmp/constants.o
+ .text          0x0000000000008004        0x0 tmp/constants_b.o
  .text          0x0000000000008004       0xb4 tmp/gpio.o
                 0x0000000000008004                gpio_set_function
                 0x0000000000008048                gpio_output
@@ -52,6 +57,7 @@ LOAD tmp/timer.o
  *(.data)
  .data          0x0000000000008168        0x0 tmp/constants_bplus.o
  .data          0x0000000000008168        0x0 tmp/constants.o
+ .data          0x0000000000008168        0x0 tmp/constants_b.o
  .data          0x0000000000008168        0x0 tmp/gpio.o
  .data          0x0000000000008168        0x0 tmp/main.o
  .data          0x0000000000008168        0x0 tmp/timer.o
