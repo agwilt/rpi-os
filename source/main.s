@@ -20,33 +20,80 @@ mov r0, #LED_PWR			// set pin number
 mov r1, #GPIO_OUT			// set pin function
 bl gpio_set_function
 
+// switch on power pin
 mov r0, #LED_PWR
 mov r1, #GPIO_HIGH
 bl gpio_output
 
-ldr r4, =pattern			// morse pattern to blink
-mov r5, #0					// count how far along the pattern we are
-ldr r6, =200000				// dot length
-morse_loop$:
-	mov r0, #1
-	lsl r0, r5
-	ands r0, r4				// 1 if led on, 0 if off
-	beq morse_low$			// b to morse_low if r0 is 0
+// now for the morse stuff
+ldr r4, =200000				// duration
+add r5, r4, r4, lsl #1		// r5 = 3*r4
 
-	mov r0, #LED_OK			// blink LED for r6 microseconds
-	mov r1, r6
+loop$:
+
+	//S
+	mov r0, #LED_ACT
+	mov r1, r4
 	bl gpio_blink
-	b morse_loop_end$
-
-	morse_low$:				// sleep for r6 microseconds
-	mov r0, r6
+	mov r0, r4
 	bl st_sleep
 
-	morse_loop_end$:
-	add r5, #1				// increment counter
-	cmp r5, #31				// loop if counter is under max
-	bls morse_loop$
+	mov r0, #LED_ACT
+	mov r1, r4
+	bl gpio_blink
+	mov r0, r4
+	bl st_sleep
 
+	mov r0, #LED_ACT
+	mov r1, r4
+	bl gpio_blink
+
+	mov r0, r5
+	bl st_sleep
+
+	//O
+	mov r0, #LED_ACT
+	mov r1, r5
+	bl gpio_blink
+	mov r0, r4
+	bl st_sleep
+
+	mov r0, #LED_ACT
+	mov r1, r5
+	bl gpio_blink
+	mov r0, r4
+	bl st_sleep
+
+	mov r0, #LED_ACT
+	mov r1, r5
+	bl gpio_blink
+
+	mov r0, r5
+	bl st_sleep
+
+	//S
+	mov r0, #LED_ACT
+	mov r1, r4
+	bl gpio_blink
+	mov r0, r4
+	bl st_sleep
+
+	mov r0, #LED_ACT
+	mov r1, r4
+	bl gpio_blink
+	mov r0, r4
+	bl st_sleep
+
+	mov r0, #LED_ACT
+	mov r1, r4
+	bl gpio_blink
+
+	mov r0, r5
+	bl st_sleep
+
+	b loop$
+
+	
 /*
 //loop for ever
 loop$:

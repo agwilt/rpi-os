@@ -55,7 +55,7 @@ Disassembly of section .text:
     808c:	e3a01001 	mov	r1, #1
     8090:	ebffffec 	bl	8048 <gpio_output>
     8094:	e49d0004 	pop	{r0}		; (ldr r0, [sp], #4)
-    8098:	eb000022 	bl	8128 <st_sleep>
+    8098:	eb000041 	bl	81a4 <st_sleep>
     809c:	e1a00003 	mov	r0, r3
     80a0:	e3a01000 	mov	r1, #0
     80a4:	ebffffe7 	bl	8048 <gpio_output>
@@ -75,50 +75,77 @@ Disassembly of section .text:
     80d4:	e3a00023 	mov	r0, #35	; 0x23
     80d8:	e3a01001 	mov	r1, #1
     80dc:	ebffffd9 	bl	8048 <gpio_output>
-    80e0:	e59f4038 	ldr	r4, [pc, #56]	; 8120 <morse_loop_end$+0xc>
-    80e4:	e3a05000 	mov	r5, #0
-    80e8:	e59f6034 	ldr	r6, [pc, #52]	; 8124 <morse_loop_end$+0x10>
+    80e0:	e59f40b8 	ldr	r4, [pc, #184]	; 81a0 <loop$+0xb8>
+    80e4:	e0845084 	add	r5, r4, r4, lsl #1
 
-000080ec <morse_loop$>:
-    80ec:	e3a00001 	mov	r0, #1
-    80f0:	e1a00510 	lsl	r0, r0, r5
-    80f4:	e0100004 	ands	r0, r0, r4
-    80f8:	0a000003 	beq	810c <morse_low$>
+000080e8 <loop$>:
+    80e8:	e3a0002f 	mov	r0, #47	; 0x2f
+    80ec:	e1a01004 	mov	r1, r4
+    80f0:	ebffffe2 	bl	8080 <gpio_blink>
+    80f4:	e1a00004 	mov	r0, r4
+    80f8:	eb000029 	bl	81a4 <st_sleep>
     80fc:	e3a0002f 	mov	r0, #47	; 0x2f
-    8100:	e1a01006 	mov	r1, r6
+    8100:	e1a01004 	mov	r1, r4
     8104:	ebffffdd 	bl	8080 <gpio_blink>
-    8108:	ea000001 	b	8114 <morse_loop_end$>
+    8108:	e1a00004 	mov	r0, r4
+    810c:	eb000024 	bl	81a4 <st_sleep>
+    8110:	e3a0002f 	mov	r0, #47	; 0x2f
+    8114:	e1a01004 	mov	r1, r4
+    8118:	ebffffd8 	bl	8080 <gpio_blink>
+    811c:	e1a00005 	mov	r0, r5
+    8120:	eb00001f 	bl	81a4 <st_sleep>
+    8124:	e3a0002f 	mov	r0, #47	; 0x2f
+    8128:	e1a01005 	mov	r1, r5
+    812c:	ebffffd3 	bl	8080 <gpio_blink>
+    8130:	e1a00004 	mov	r0, r4
+    8134:	eb00001a 	bl	81a4 <st_sleep>
+    8138:	e3a0002f 	mov	r0, #47	; 0x2f
+    813c:	e1a01005 	mov	r1, r5
+    8140:	ebffffce 	bl	8080 <gpio_blink>
+    8144:	e1a00004 	mov	r0, r4
+    8148:	eb000015 	bl	81a4 <st_sleep>
+    814c:	e3a0002f 	mov	r0, #47	; 0x2f
+    8150:	e1a01005 	mov	r1, r5
+    8154:	ebffffc9 	bl	8080 <gpio_blink>
+    8158:	e1a00005 	mov	r0, r5
+    815c:	eb000010 	bl	81a4 <st_sleep>
+    8160:	e3a0002f 	mov	r0, #47	; 0x2f
+    8164:	e1a01004 	mov	r1, r4
+    8168:	ebffffc4 	bl	8080 <gpio_blink>
+    816c:	e1a00004 	mov	r0, r4
+    8170:	eb00000b 	bl	81a4 <st_sleep>
+    8174:	e3a0002f 	mov	r0, #47	; 0x2f
+    8178:	e1a01004 	mov	r1, r4
+    817c:	ebffffbf 	bl	8080 <gpio_blink>
+    8180:	e1a00004 	mov	r0, r4
+    8184:	eb000006 	bl	81a4 <st_sleep>
+    8188:	e3a0002f 	mov	r0, #47	; 0x2f
+    818c:	e1a01004 	mov	r1, r4
+    8190:	ebffffba 	bl	8080 <gpio_blink>
+    8194:	e1a00005 	mov	r0, r5
+    8198:	eb000001 	bl	81a4 <st_sleep>
+    819c:	eaffffd1 	b	80e8 <loop$>
+    81a0:	00030d40 	andeq	r0, r3, r0, asr #26
 
-0000810c <morse_low$>:
-    810c:	e1a00006 	mov	r0, r6
-    8110:	eb000004 	bl	8128 <st_sleep>
+000081a4 <st_sleep>:
+    81a4:	e59f1024 	ldr	r1, [pc, #36]	; 81d0 <st_get_timestamp+0xc>
+    81a8:	e5911000 	ldr	r1, [r1]
+    81ac:	e0800001 	add	r0, r0, r1
 
-00008114 <morse_loop_end$>:
-    8114:	e2855001 	add	r5, r5, #1
-    8118:	e355001f 	cmp	r5, #31
-    811c:	9afffff2 	bls	80ec <morse_loop$>
-    8120:	00008158 	andeq	r8, r0, r8, asr r1
-    8124:	00030d40 	andeq	r0, r3, r0, asr #26
+000081b0 <sleep_loop$>:
+    81b0:	e59f1018 	ldr	r1, [pc, #24]	; 81d0 <st_get_timestamp+0xc>
+    81b4:	e5911000 	ldr	r1, [r1]
+    81b8:	e1510000 	cmp	r1, r0
+    81bc:	3afffffb 	bcc	81b0 <sleep_loop$>
+    81c0:	e1a0f00e 	mov	pc, lr
 
-00008128 <st_sleep>:
-    8128:	e59f1024 	ldr	r1, [pc, #36]	; 8154 <st_get_timestamp+0xc>
-    812c:	e5911000 	ldr	r1, [r1]
-    8130:	e0800001 	add	r0, r0, r1
-
-00008134 <sleep_loop$>:
-    8134:	e59f1018 	ldr	r1, [pc, #24]	; 8154 <st_get_timestamp+0xc>
-    8138:	e5911000 	ldr	r1, [r1]
-    813c:	e1510000 	cmp	r1, r0
-    8140:	3afffffb 	bcc	8134 <sleep_loop$>
-    8144:	e1a0f00e 	mov	pc, lr
-
-00008148 <st_get_timestamp>:
-    8148:	e59f0004 	ldr	r0, [pc, #4]	; 8154 <st_get_timestamp+0xc>
-    814c:	e1c000d0 	ldrd	r0, [r0]
-    8150:	e1a0f00e 	mov	pc, lr
-    8154:	20003004 	andcs	r3, r0, r4
+000081c4 <st_get_timestamp>:
+    81c4:	e59f0004 	ldr	r0, [pc, #4]	; 81d0 <st_get_timestamp+0xc>
+    81c8:	e1c000d0 	ldrd	r0, [r0]
+    81cc:	e1a0f00e 	mov	pc, lr
+    81d0:	20003004 	andcs	r3, r0, r4
 
 Disassembly of section .data:
 
-00008158 <pattern>:
-    8158:	ffaa222a 			; <UNDEFINED> instruction: 0xffaa222a
+000081d4 <pattern>:
+    81d4:	ffaa222a 			; <UNDEFINED> instruction: 0xffaa222a

@@ -43,7 +43,7 @@ LOAD tmp/timer.o
  .init          0x0000000000008000        0x4 tmp/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008004      0x154
+.text           0x0000000000008004      0x1d0
  *(.text)
  .text          0x0000000000008004        0x0 tmp/constants_bplus.o
  .text          0x0000000000008004        0x0 tmp/constants.o
@@ -52,21 +52,21 @@ LOAD tmp/timer.o
                 0x0000000000008004                gpio_set_function
                 0x0000000000008048                gpio_output
                 0x0000000000008080                gpio_blink
- .text          0x00000000000080b8       0x70 tmp/main.o
- .text          0x0000000000008128        0x0 tmp/constants_2b.o
- .text          0x0000000000008128       0x30 tmp/timer.o
-                0x0000000000008128                st_sleep
-                0x0000000000008148                st_get_timestamp
+ .text          0x00000000000080b8       0xec tmp/main.o
+ .text          0x00000000000081a4        0x0 tmp/constants_2b.o
+ .text          0x00000000000081a4       0x30 tmp/timer.o
+                0x00000000000081a4                st_sleep
+                0x00000000000081c4                st_get_timestamp
 
-.data           0x0000000000008158        0x4
+.data           0x00000000000081d4        0x4
  *(.data)
- .data          0x0000000000008158        0x0 tmp/constants_bplus.o
- .data          0x0000000000008158        0x0 tmp/constants.o
- .data          0x0000000000008158        0x0 tmp/constants_b.o
- .data          0x0000000000008158        0x0 tmp/gpio.o
- .data          0x0000000000008158        0x4 tmp/main.o
- .data          0x000000000000815c        0x0 tmp/constants_2b.o
- .data          0x000000000000815c        0x0 tmp/timer.o
+ .data          0x00000000000081d4        0x0 tmp/constants_bplus.o
+ .data          0x00000000000081d4        0x0 tmp/constants.o
+ .data          0x00000000000081d4        0x0 tmp/constants_b.o
+ .data          0x00000000000081d4        0x0 tmp/gpio.o
+ .data          0x00000000000081d4        0x4 tmp/main.o
+ .data          0x00000000000081d8        0x0 tmp/constants_2b.o
+ .data          0x00000000000081d8        0x0 tmp/timer.o
 
 /DISCARD/
  *(*)
