@@ -1,7 +1,7 @@
-.set GPIO_BASE, 0x20200000		// start of the GPIO registers
+.set GPIO_BASE, 0x3F200000		// start of the GPIO registers
 .set GPIO_MAX_PIN, 53
-.set GPSET0, 0x2020001c			// first pin setting word
-.set GPCLR0, 0x20200028			// first pin clearing word
+.set GPSET0, 0x3F20001c			// first pin setting word
+.set GPCLR0, 0x3F200028			// first pin clearing word
 
 .set GPIO_HIGH, 1
 .set GPIO_LOW, 0
@@ -12,6 +12,7 @@
 .set LED_OK, 47
 .set LED_PWR, 35
 
+// no idea where the system timer stuff is
 .set ST_BASE, 0x20003000		// base address for the system timer
 .set ST_CS, ST_BASE				// system timer control/status
 .set ST_CL, 0x20003004			// counter
