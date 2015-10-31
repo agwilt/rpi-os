@@ -71,7 +71,7 @@
 00000023 a LED_PWR
 000080d4 t loop$
 000080b8 t main
-00008140 t sleep_loop$
+00008144 t sleep_loop$
 00008000 T _start
 20003000 a ST_BASE
 20003000 a ST_BASE

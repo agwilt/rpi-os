@@ -101,15 +101,15 @@ Disassembly of section .text:
     8134:	00030d40 	andeq	r0, r3, r0, asr #26
 
 00008138 <st_sleep>:
-    8138:	e59f2024 	ldr	r2, [pc, #36]	; 8164 <st_get_timestamp+0xc>
-    813c:	e5922000 	ldr	r2, [r2]
+    8138:	e59f1024 	ldr	r1, [pc, #36]	; 8164 <st_get_timestamp+0xc>
+    813c:	e5911000 	ldr	r1, [r1]
+    8140:	e0800001 	add	r0, r0, r1
 
-00008140 <sleep_loop$>:
-    8140:	e59f101c 	ldr	r1, [pc, #28]	; 8164 <st_get_timestamp+0xc>
-    8144:	e5911000 	ldr	r1, [r1]
-    8148:	e0411002 	sub	r1, r1, r2
+00008144 <sleep_loop$>:
+    8144:	e59f1018 	ldr	r1, [pc, #24]	; 8164 <st_get_timestamp+0xc>
+    8148:	e5911000 	ldr	r1, [r1]
     814c:	e1510000 	cmp	r1, r0
-    8150:	9afffffa 	bls	8140 <sleep_loop$>
+    8150:	3afffffb 	bcc	8144 <sleep_loop$>
     8154:	e1a0f00e 	mov	pc, lr
 
 00008158 <st_get_timestamp>:

@@ -4,14 +4,14 @@
 st_sleep:
 	// r0: number of μSeconds to sleep
 
-	ldr r2, =ST_CL
-	ldr r2, [r2]				// timestamp at start
+	ldr r1, =ST_CL
+	ldr r1, [r1]				// timestamp at start
+	add r0, r1					// timestamp at end
 	sleep_loop$:
 		ldr r1, =ST_CL
 		ldr r1, [r1]			// current timestamp
-		sub r1, r1, r2			// r1 = current - start = time elapsed
 		cmp r1, r0
-		bls sleep_loop$			// if current is lower than end, loop
+		blo sleep_loop$			// if current is lower than end, loop
 
 	mov pc, lr
 
