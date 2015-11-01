@@ -1,27 +1,15 @@
 
 Discarded input sections
 
- .bss           0x0000000000000000        0x0 tmp/constants_bplus.o
+ .bss           0x0000000000000000        0x0 tmp/timer.o
  .ARM.attributes
-                0x0000000000000000       0x14 tmp/constants_bplus.o
- .bss           0x0000000000000000        0x0 tmp/constants.o
- .ARM.attributes
-                0x0000000000000000       0x14 tmp/constants.o
- .bss           0x0000000000000000        0x0 tmp/constants_b.o
- .ARM.attributes
-                0x0000000000000000       0x14 tmp/constants_b.o
+                0x0000000000000000       0x14 tmp/timer.o
  .bss           0x0000000000000000        0x0 tmp/gpio.o
  .ARM.attributes
                 0x0000000000000000       0x14 tmp/gpio.o
  .bss           0x0000000000000000        0x0 tmp/main.o
  .ARM.attributes
                 0x0000000000000000       0x14 tmp/main.o
- .bss           0x0000000000000000        0x0 tmp/constants_2b.o
- .ARM.attributes
-                0x0000000000000000       0x14 tmp/constants_2b.o
- .bss           0x0000000000000000        0x0 tmp/timer.o
- .ARM.attributes
-                0x0000000000000000       0x14 tmp/timer.o
 
 Memory Configuration
 
@@ -30,43 +18,31 @@ Name             Origin             Length             Attributes
 
 Linker script and memory map
 
-LOAD tmp/constants_bplus.o
-LOAD tmp/constants.o
-LOAD tmp/constants_b.o
+LOAD tmp/timer.o
 LOAD tmp/gpio.o
 LOAD tmp/main.o
-LOAD tmp/constants_2b.o
-LOAD tmp/timer.o
 
 .init           0x0000000000008000        0x4
  *(.init)
  .init          0x0000000000008000        0x4 tmp/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008004      0x184
+.text           0x0000000000008004      0x190
  *(.text)
- .text          0x0000000000008004        0x0 tmp/constants_bplus.o
- .text          0x0000000000008004        0x0 tmp/constants.o
- .text          0x0000000000008004        0x0 tmp/constants_b.o
- .text          0x0000000000008004       0xb4 tmp/gpio.o
-                0x0000000000008004                gpio_set_function
-                0x0000000000008048                gpio_output
-                0x0000000000008080                gpio_blink
- .text          0x00000000000080b8       0xa0 tmp/main.o
- .text          0x0000000000008158        0x0 tmp/constants_2b.o
- .text          0x0000000000008158       0x30 tmp/timer.o
-                0x0000000000008158                st_sleep
-                0x0000000000008178                st_get_timestamp
+ .text          0x0000000000008004       0x30 tmp/timer.o
+                0x0000000000008004                st_sleep
+                0x0000000000008024                st_get_timestamp
+ .text          0x0000000000008034       0xb4 tmp/gpio.o
+                0x0000000000008034                gpio_set_function
+                0x0000000000008078                gpio_output
+                0x00000000000080b0                gpio_blink
+ .text          0x00000000000080e8       0xac tmp/main.o
 
-.data           0x0000000000008188        0x8
+.data           0x0000000000008194        0x8
  *(.data)
- .data          0x0000000000008188        0x0 tmp/constants_bplus.o
- .data          0x0000000000008188        0x0 tmp/constants.o
- .data          0x0000000000008188        0x0 tmp/constants_b.o
- .data          0x0000000000008188        0x0 tmp/gpio.o
- .data          0x0000000000008188        0x8 tmp/main.o
- .data          0x0000000000008190        0x0 tmp/constants_2b.o
- .data          0x0000000000008190        0x0 tmp/timer.o
+ .data          0x0000000000008194        0x0 tmp/timer.o
+ .data          0x0000000000008194        0x0 tmp/gpio.o
+ .data          0x0000000000008194        0x8 tmp/main.o
 
 /DISCARD/
  *(*)

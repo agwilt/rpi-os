@@ -1,4 +1,4 @@
-.include "constants.s"
+#include "constants.h"
 
 .globl st_sleep
 st_sleep:

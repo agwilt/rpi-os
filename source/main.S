@@ -1,4 +1,4 @@
-.include "constants.s"
+#include "constants.h"
 
 .section .init
 .globl _start
@@ -10,8 +10,8 @@ b main
 main:
 mov sp,#0x8000
 
-//enable output for the OK LED pin
-mov r0, #LED_OK				// set pin number
+//enable output for the ACT LED pin
+mov r0, #LED_ACT				// set pin number
 mov r1, #GPIO_OUT			// set pin function
 bl gpio_set_function
 
@@ -30,9 +30,20 @@ ldr r6, =200000				// base duration
 add r5, r4, r4, lsl #1		// r5 = 3*r4
 
 loop$:
+	mov r0, #LED_ACT
+	mov r1, r6
+	bl gpio_blink
+
+	mov r0, r6
+	bl st_sleep
+
+	b loop$
+
+	/*
 	// s
 	ldr r0, =s
 	bl morse
+	*/
 
 
 
@@ -59,7 +70,7 @@ morse:
 		b morse_end$
 
 		mul r1, r7, r0			// blink duration is code*base duration
-		mov r0, #LED_OK
+		mov r0, #LED_ACT
 		bl gpio_blink
 
 		//loop end stuff

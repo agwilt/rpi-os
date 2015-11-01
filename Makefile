@@ -16,7 +16,7 @@ SOURCE=source/
 TMP=tmp/
 
 # files
-OBJECTS := $(patsubst $(SOURCE)%.s,$(TMP)%.o,$(wildcard $(SOURCE)*.s))
+OBJECTS := $(patsubst $(SOURCE)%.S,$(TMP)%.o,$(wildcard $(SOURCE)*.S))
 ELF=$(TMP)kernel.elf
 TARGET=$(BUILD)kernel.img
 
