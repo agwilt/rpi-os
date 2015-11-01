@@ -82,8 +82,12 @@
 00000023 a LED_PWR
 000080e8 t loop$
 000080b8 t main
-000081d4 d pattern
-000081b0 t sleep_loop$
+000080f0 t morse
+0000813c t morse_end$
+00008114 t morseloop$
+0000818c d o
+00008188 d s
+00008164 t sleep_loop$
 00008000 T _start
 20003000 a ST_BASE
 20003000 a ST_BASE
@@ -148,5 +152,5 @@
 20003000 a ST_CS
 20003000 a ST_CS
 20003000 a ST_CS
-000081c4 T st_get_timestamp
-000081a4 T st_sleep
+00008178 T st_get_timestamp
+00008158 T st_sleep
