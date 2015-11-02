@@ -30,20 +30,26 @@ ldr r6, =200000				// base duration
 add r5, r4, r4, lsl #1		// r5 = 3*r4
 
 loop$:
-	mov r0, #LED_ACT
+	// s
+	ldr r0, =s
 	mov r1, r6
-	bl gpio_blink
+	bl morse
 
-	mov r0, r6
+	// o
+	ldr r0, =o
+	mov r1, r6
+	bl morse
+
+	// s
+	ldr r0, =s
+	mov r1, r6
+	bl morse
+
+	// and pause
+	ldr r0, =1000000
 	bl st_sleep
 
 	b loop$
-
-	/*
-	// s
-	ldr r0, =s
-	bl morse
-	*/
 
 
 
@@ -62,8 +68,8 @@ morse:
 
 	morseloop$:
 		mov r0, r4				// pattern in r0
-		add r1, r5, r5			// r2 = 2*counter
-		lsr r0, r1				// shift pattern to the right so important pair is aat right
+		add r1, r5, r5			// r1 = 2*counter
+		lsr r0, r1				// shift pattern to the right so important pair is at right
 		and r0, r6				// clear the rest of the bits
 		// r0 now contains the 'character' code
 		cmp r0, #0				// return if code is 00
@@ -74,7 +80,11 @@ morse:
 		bl gpio_blink
 
 		//loop end stuff
-		add r5, #1
+		add r5, #1				// increment counter
+		add r0, r7, r7, lsl #1	// r0 = 3*duration
+		bl st_sleep
+
+		b morseloop$
 
 	morse_end$:
 		pop {r7}

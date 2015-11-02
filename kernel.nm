@@ -5,11 +5,11 @@
 00008044 t gpio_set_function_loop$
 00008118 t loop$
 000080e8 t main
-00008130 t morse
-0000817c t morse_end$
-00008154 t morseloop$
-00008198 d o
-00008194 d s
+00008148 t morse
+000081a0 t morse_end$
+0000816c t morseloop$
+000081c8 d o
+000081c4 d s
 00008010 t sleep_loop$
 00008000 T _start
 00008024 T st_get_timestamp
