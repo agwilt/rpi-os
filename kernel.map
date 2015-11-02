@@ -38,11 +38,11 @@ LOAD tmp/main.o
                 0x00000000000080b0                gpio_blink
  .text          0x00000000000080e8       0xdc tmp/main.o
 
-.data           0x00000000000081c4        0x8
+.data           0x00000000000081c4       0x68
  *(.data)
  .data          0x00000000000081c4        0x0 tmp/timer.o
  .data          0x00000000000081c4        0x0 tmp/gpio.o
- .data          0x00000000000081c4        0x8 tmp/main.o
+ .data          0x00000000000081c4       0x68 tmp/main.o
 
 /DISCARD/
  *(*)
