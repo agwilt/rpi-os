@@ -11,7 +11,8 @@ A Video:
 [![Blink!](http://img.youtube.com/vi/yJaX_SZM4kE/0.jpg)](https://www.youtube.com/watch?v=yJaX_SZM4kE)
 
 **Source files:**
-* [`main.S`](source/main.S): the main file (containg `_start`).
+* [`main.S`](source/main.S): the main file (containg `_start`)
+* [`misc.S`](source/misc.S): miscellaneous subroutines
 * [`gpio.S`](source/gpio.S): subroutines for GPIO stuff
 * [`timer.S`](source/timer.S): system timer subroutines
 * [`constants.h`](source/constants.h): useful constants for the assembler
