@@ -9,7 +9,7 @@ gpio_set_function:
 
 	// check inputs, exit if any are too high
 	cmp r0, #GPIO_MAX_PIN
-	cmpls r1, #7
+	cmpls r1, #7			// there are 8 modes (0..7)
 	movhi pc, lr
 
 	// store the GPIO base address in r2

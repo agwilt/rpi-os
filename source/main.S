@@ -27,9 +27,12 @@ bl gpio_output
 
 // now for the morse stuff
 ldr r6, =200000				// base duration
-add r5, r4, r4, lsl #1		// r5 = 3*r4
 
 loop$:
+	mov r0, #LED_ACT
+	mov r1, r6
+	bl gpio_blink
+
 	// s
 	ldr r0, =letter_s
 	mov r1, r6
@@ -75,7 +78,8 @@ morse:
 		cmp r0, #0				// return if code is 00
 		b morse_end$
 
-		mul r1, r7, r0			// blink duration is code*base duration
+		//mul r1, r7, r0			// blink duration is code*base duration
+		mov r1, r7
 		mov r0, #LED_ACT
 		bl gpio_blink
 
@@ -87,6 +91,9 @@ morse:
 		b morseloop$
 
 	morse_end$:
+		add r0, r7, r7, lsl #1
+		bl st_sleep
+
 		pop {r7}
 		pop {r6}
 		pop {r5}
