@@ -36,44 +36,44 @@ ldr r4, =150000				// base duration
 
 loop$:
 	// a
-	ldr r2, =letter_a
-	ldr r0, [r2]
+	mov r0, #65
+	bl letter_to_pattern$
 	mov r1, r4
 	bl misc_morse_pattern
 
 	// n
-	ldr r2, =letter_n
-	ldr r0, [r2]
+	mov r0, #78
+	bl letter_to_pattern$
 	mov r1, r4
 	bl misc_morse_pattern
 
 	// d
-	ldr r2, =letter_d
-	ldr r0, [r2]
+	mov r0, #68
+	bl letter_to_pattern$
 	mov r1, r4
 	bl misc_morse_pattern
 
 	// r
-	ldr r2, =letter_r
-	ldr r0, [r2]
+	mov r0, #82
+	bl letter_to_pattern$
 	mov r1, r4
 	bl misc_morse_pattern
 
 	// e
-	ldr r2, =letter_e
-	ldr r0, [r2]
+	mov r0, #69
+	bl letter_to_pattern$
 	mov r1, r4
 	bl misc_morse_pattern
 
 	// a
-	ldr r2, =letter_a
-	ldr r0, [r2]
+	mov r0, #65
+	bl letter_to_pattern$
 	mov r1, r4
 	bl misc_morse_pattern
 
 	// s
-	ldr r2, =letter_s
-	ldr r0, [r2]
+	mov r0, #83
+	bl letter_to_pattern$
 	mov r1, r4
 	bl misc_morse_pattern
 
@@ -83,6 +83,28 @@ loop$:
 	bl st_sleep
 
 	b loop$
+
+letter_to_pattern$:
+	// r0: ascii code for letter
+	// This function takes a letter and translates it to an pattern for misc_morse_pattern
+
+	// first check value a bit
+	cmp r0, #97
+	subge r0, #32			// convert to lower case if >= 'a'
+	cmp r0, #90
+	movgt pc, lr			// return if greater than 'Z'
+	subs r0, #65
+	movmi pc, lr			// return if < 'A'
+
+	sub r0, #65
+	lsl r0, #2				// multiply offset by 4 (bytes)
+	// r0 now contains the offset of the (upper case) letter from 'A'
+	ldr r1, =letter_a		// address of letter_a in r1
+	add r1, r0				// move forward by offset r0
+	ldr r0, [r1]			// and return value
+
+	// return
+	mov pc, lr
 
 .section .data
 
