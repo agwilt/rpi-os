@@ -30,11 +30,11 @@
 0000823c d letter_x
 00008240 d letter_y
 00008244 d letter_z
-00008120 t loop$
-000080e8 t main
-00008160 t morse
-000081b8 t morse_end$
-00008184 t morseloop$
+00008194 t loop$
+0000815c t main
+000080e8 T misc_morse_pattern
+00008140 t morse_end$
+0000810c t morse_loop$
 00008010 t sleep_loop$
 00008000 T _start
 00008024 T st_get_timestamp

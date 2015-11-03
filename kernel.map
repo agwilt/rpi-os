@@ -7,6 +7,9 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 tmp/gpio.o
  .ARM.attributes
                 0x0000000000000000       0x14 tmp/gpio.o
+ .bss           0x0000000000000000        0x0 tmp/misc.o
+ .ARM.attributes
+                0x0000000000000000       0x14 tmp/misc.o
  .bss           0x0000000000000000        0x0 tmp/main.o
  .ARM.attributes
                 0x0000000000000000       0x14 tmp/main.o
@@ -20,6 +23,7 @@ Linker script and memory map
 
 LOAD tmp/timer.o
 LOAD tmp/gpio.o
+LOAD tmp/misc.o
 LOAD tmp/main.o
 
 .init           0x0000000000008000        0x4
@@ -36,12 +40,15 @@ LOAD tmp/main.o
                 0x0000000000008034                gpio_set_function
                 0x0000000000008078                gpio_output
                 0x00000000000080b0                gpio_blink
- .text          0x00000000000080e8       0xf8 tmp/main.o
+ .text          0x00000000000080e8       0x74 tmp/misc.o
+                0x00000000000080e8                misc_morse_pattern
+ .text          0x000000000000815c       0x84 tmp/main.o
 
 .data           0x00000000000081e0       0x68
  *(.data)
  .data          0x00000000000081e0        0x0 tmp/timer.o
  .data          0x00000000000081e0        0x0 tmp/gpio.o
+ .data          0x00000000000081e0        0x0 tmp/misc.o
  .data          0x00000000000081e0       0x68 tmp/main.o
 
 /DISCARD/

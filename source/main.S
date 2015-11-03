@@ -8,7 +8,7 @@ b main
 
 .section .text
 main:
-mov sp,#0x8000
+mov sp, #0x8000
 
 //enable output for the ACT LED pin
 mov r0, #LED_ACT				// set pin number
@@ -39,19 +39,19 @@ loop$:
 	ldr r2, =letter_s
 	ldr r0, [r2]
 	mov r1, r6
-	bl morse
+	bl misc_morse_pattern
 
 	// o
 	ldr r2, =letter_o
 	ldr r0, [r2]
 	mov r1, r6
-	bl morse
+	bl misc_morse_pattern
 
 	// s
 	ldr r2, =letter_s
 	ldr r0, [r2]
 	mov r1, r6
-	bl morse
+	bl misc_morse_pattern
 
 	// and pause
 	add r0, r6, r6, lsl #1
@@ -59,54 +59,6 @@ loop$:
 	bl st_sleep
 
 	b loop$
-
-
-
-morse:
-	// r0: pattern
-	// r1: base duration
-	push {lr}
-	push {r4}
-	push {r5}
-	push {r6}
-	push {r7}
-	mov r4, r0				// pattern
-	mov r5, #0				// counter
-	mov r6, #0b11			// mask
-	mov r7, r1				// base duration
-
-	morseloop$:
-		mov r0, r4				// pattern in r0
-		mov r1, #0
-		add r1, r5, r5			// r1 = 2*counter
-		lsr r0, r1				// shift pattern to the right so important pair is at right
-		ands r0, r6				// clear the rest of the bits
-		// r0 now contains the 'character' code
-
-		beq morse_end$
-
-		mul r1, r7, r0			// blink duration is code*base duration
-		mov r0, #LED_ACT
-		bl gpio_blink
-
-		//loop end stuff
-		add r5, #1				// increment counter
-		mov r0, r7				// sleep for base_duration
-		bl st_sleep
-
-		b morseloop$
-
-	morse_end$:
-	add r0, r7, r7, lsl #1	// sleep for 3*base between charaters
-	bl st_sleep
-
-	pop {r7}
-	pop {r6}
-	pop {r5}
-	pop {r4}
-	pop {pc}
-
-
 
 .section .data
 

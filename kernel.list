@@ -5,7 +5,7 @@ tmp/kernel.elf:     file format elf32-littlearm
 Disassembly of section .init:
 
 00008000 <_start>:
-    8000:	ea000038 	b	80e8 <main>
+    8000:	ea000055 	b	815c <main>
 
 Disassembly of section .text:
 
@@ -82,74 +82,74 @@ Disassembly of section .text:
     80e0:	20200028 	eorcs	r0, r0, r8, lsr #32
     80e4:	2020001c 	eorcs	r0, r0, ip, lsl r0
 
-000080e8 <main>:
-    80e8:	e3a0d902 	mov	sp, #32768	; 0x8000
-    80ec:	e3a0002f 	mov	r0, #47	; 0x2f
-    80f0:	e3a01001 	mov	r1, #1
-    80f4:	ebffffce 	bl	8034 <gpio_set_function>
-    80f8:	e3a00023 	mov	r0, #35	; 0x23
-    80fc:	e3a01001 	mov	r1, #1
-    8100:	ebffffcb 	bl	8034 <gpio_set_function>
-    8104:	e3a00023 	mov	r0, #35	; 0x23
-    8108:	e3a01001 	mov	r1, #1
-    810c:	ebffffd9 	bl	8078 <gpio_output>
-    8110:	e3a0002f 	mov	r0, #47	; 0x2f
-    8114:	e3a01000 	mov	r1, #0
-    8118:	ebffffd6 	bl	8078 <gpio_output>
-    811c:	e59f60b0 	ldr	r6, [pc, #176]	; 81d4 <morse_end$+0x1c>
+000080e8 <misc_morse_pattern>:
+    80e8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+    80ec:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
+    80f0:	e52d5004 	push	{r5}		; (str r5, [sp, #-4]!)
+    80f4:	e52d6004 	push	{r6}		; (str r6, [sp, #-4]!)
+    80f8:	e52d7004 	push	{r7}		; (str r7, [sp, #-4]!)
+    80fc:	e1a04000 	mov	r4, r0
+    8100:	e3a05000 	mov	r5, #0
+    8104:	e3a06003 	mov	r6, #3
+    8108:	e1a07001 	mov	r7, r1
 
-00008120 <loop$>:
-    8120:	e59f20b0 	ldr	r2, [pc, #176]	; 81d8 <morse_end$+0x20>
-    8124:	e5920000 	ldr	r0, [r2]
-    8128:	e1a01006 	mov	r1, r6
-    812c:	eb00000b 	bl	8160 <morse>
-    8130:	e59f20a4 	ldr	r2, [pc, #164]	; 81dc <morse_end$+0x24>
-    8134:	e5920000 	ldr	r0, [r2]
-    8138:	e1a01006 	mov	r1, r6
-    813c:	eb000007 	bl	8160 <morse>
-    8140:	e59f2090 	ldr	r2, [pc, #144]	; 81d8 <morse_end$+0x20>
-    8144:	e5920000 	ldr	r0, [r2]
-    8148:	e1a01006 	mov	r1, r6
-    814c:	eb000003 	bl	8160 <morse>
-    8150:	e0860086 	add	r0, r6, r6, lsl #1
-    8154:	e1a00080 	lsl	r0, r0, #1
-    8158:	ebffffa9 	bl	8004 <st_sleep>
-    815c:	eaffffef 	b	8120 <loop$>
+0000810c <morse_loop$>:
+    810c:	e1a00004 	mov	r0, r4
+    8110:	e3a01000 	mov	r1, #0
+    8114:	e0851005 	add	r1, r5, r5
+    8118:	e1a00130 	lsr	r0, r0, r1
+    811c:	e0100006 	ands	r0, r0, r6
+    8120:	0a000006 	beq	8140 <morse_end$>
+    8124:	e0010097 	mul	r1, r7, r0
+    8128:	e3a0002f 	mov	r0, #47	; 0x2f
+    812c:	ebffffdf 	bl	80b0 <gpio_blink>
+    8130:	e2855001 	add	r5, r5, #1
+    8134:	e1a00007 	mov	r0, r7
+    8138:	ebffffb1 	bl	8004 <st_sleep>
+    813c:	eafffff2 	b	810c <morse_loop$>
 
-00008160 <morse>:
-    8160:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
-    8164:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
-    8168:	e52d5004 	push	{r5}		; (str r5, [sp, #-4]!)
-    816c:	e52d6004 	push	{r6}		; (str r6, [sp, #-4]!)
-    8170:	e52d7004 	push	{r7}		; (str r7, [sp, #-4]!)
-    8174:	e1a04000 	mov	r4, r0
-    8178:	e3a05000 	mov	r5, #0
-    817c:	e3a06003 	mov	r6, #3
-    8180:	e1a07001 	mov	r7, r1
+00008140 <morse_end$>:
+    8140:	e0870087 	add	r0, r7, r7, lsl #1
+    8144:	ebffffae 	bl	8004 <st_sleep>
+    8148:	e49d7004 	pop	{r7}		; (ldr r7, [sp], #4)
+    814c:	e49d6004 	pop	{r6}		; (ldr r6, [sp], #4)
+    8150:	e49d5004 	pop	{r5}		; (ldr r5, [sp], #4)
+    8154:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
+    8158:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
 
-00008184 <morseloop$>:
-    8184:	e1a00004 	mov	r0, r4
+0000815c <main>:
+    815c:	e3a0d902 	mov	sp, #32768	; 0x8000
+    8160:	e3a0002f 	mov	r0, #47	; 0x2f
+    8164:	e3a01001 	mov	r1, #1
+    8168:	ebffffb1 	bl	8034 <gpio_set_function>
+    816c:	e3a00023 	mov	r0, #35	; 0x23
+    8170:	e3a01001 	mov	r1, #1
+    8174:	ebffffae 	bl	8034 <gpio_set_function>
+    8178:	e3a00023 	mov	r0, #35	; 0x23
+    817c:	e3a01001 	mov	r1, #1
+    8180:	ebffffbc 	bl	8078 <gpio_output>
+    8184:	e3a0002f 	mov	r0, #47	; 0x2f
     8188:	e3a01000 	mov	r1, #0
-    818c:	e0851005 	add	r1, r5, r5
-    8190:	e1a00130 	lsr	r0, r0, r1
-    8194:	e0100006 	ands	r0, r0, r6
-    8198:	0a000006 	beq	81b8 <morse_end$>
-    819c:	e0010097 	mul	r1, r7, r0
-    81a0:	e3a0002f 	mov	r0, #47	; 0x2f
-    81a4:	ebffffc1 	bl	80b0 <gpio_blink>
-    81a8:	e2855001 	add	r5, r5, #1
-    81ac:	e1a00007 	mov	r0, r7
-    81b0:	ebffff93 	bl	8004 <st_sleep>
-    81b4:	eafffff2 	b	8184 <morseloop$>
+    818c:	ebffffb9 	bl	8078 <gpio_output>
+    8190:	e59f603c 	ldr	r6, [pc, #60]	; 81d4 <loop$+0x40>
 
-000081b8 <morse_end$>:
-    81b8:	e0870087 	add	r0, r7, r7, lsl #1
-    81bc:	ebffff90 	bl	8004 <st_sleep>
-    81c0:	e49d7004 	pop	{r7}		; (ldr r7, [sp], #4)
-    81c4:	e49d6004 	pop	{r6}		; (ldr r6, [sp], #4)
-    81c8:	e49d5004 	pop	{r5}		; (ldr r5, [sp], #4)
-    81cc:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
-    81d0:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+00008194 <loop$>:
+    8194:	e59f203c 	ldr	r2, [pc, #60]	; 81d8 <loop$+0x44>
+    8198:	e5920000 	ldr	r0, [r2]
+    819c:	e1a01006 	mov	r1, r6
+    81a0:	ebffffd0 	bl	80e8 <misc_morse_pattern>
+    81a4:	e59f2030 	ldr	r2, [pc, #48]	; 81dc <loop$+0x48>
+    81a8:	e5920000 	ldr	r0, [r2]
+    81ac:	e1a01006 	mov	r1, r6
+    81b0:	ebffffcc 	bl	80e8 <misc_morse_pattern>
+    81b4:	e59f201c 	ldr	r2, [pc, #28]	; 81d8 <loop$+0x44>
+    81b8:	e5920000 	ldr	r0, [r2]
+    81bc:	e1a01006 	mov	r1, r6
+    81c0:	ebffffc8 	bl	80e8 <misc_morse_pattern>
+    81c4:	e0860086 	add	r0, r6, r6, lsl #1
+    81c8:	e1a00080 	lsl	r0, r0, #1
+    81cc:	ebffff8c 	bl	8004 <st_sleep>
+    81d0:	eaffffef 	b	8194 <loop$>
     81d4:	00030d40 	andeq	r0, r3, r0, asr #26
     81d8:	00008228 	andeq	r8, r0, r8, lsr #4
     81dc:	00008218 	andeq	r8, r0, r8, lsl r2
