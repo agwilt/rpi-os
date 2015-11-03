@@ -32,29 +32,53 @@ bl gpio_output
 
 
 // now for the morse stuff
-ldr r6, =200000				// base duration
+ldr r4, =150000				// base duration
 
 loop$:
+	// a
+	ldr r2, =letter_a
+	ldr r0, [r2]
+	mov r1, r4
+	bl misc_morse_pattern
+
+	// n
+	ldr r2, =letter_n
+	ldr r0, [r2]
+	mov r1, r4
+	bl misc_morse_pattern
+
+	// d
+	ldr r2, =letter_d
+	ldr r0, [r2]
+	mov r1, r4
+	bl misc_morse_pattern
+
+	// r
+	ldr r2, =letter_r
+	ldr r0, [r2]
+	mov r1, r4
+	bl misc_morse_pattern
+
+	// e
+	ldr r2, =letter_e
+	ldr r0, [r2]
+	mov r1, r4
+	bl misc_morse_pattern
+
+	// a
+	ldr r2, =letter_a
+	ldr r0, [r2]
+	mov r1, r4
+	bl misc_morse_pattern
+
 	// s
 	ldr r2, =letter_s
 	ldr r0, [r2]
-	mov r1, r6
-	bl misc_morse_pattern
-
-	// o
-	ldr r2, =letter_o
-	ldr r0, [r2]
-	mov r1, r6
-	bl misc_morse_pattern
-
-	// s
-	ldr r2, =letter_s
-	ldr r0, [r2]
-	mov r1, r6
+	mov r1, r4
 	bl misc_morse_pattern
 
 	// and pause
-	add r0, r6, r6, lsl #1
+	add r0, r4, r4, lsl #1
 	lsl r0, #1				// r0 is 6*base_duration
 	bl st_sleep
 
