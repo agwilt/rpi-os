@@ -79,6 +79,11 @@ rebuild: clean all
 install:
 	cp build/kernel.img /run/media/andreas/boot/
 
+auto:
+	make all
+	make install
+	umount /dev/mmcblk0p1
+
 # aliases:
 list: $(LIST)
 nm: $(NM)

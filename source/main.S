@@ -99,7 +99,7 @@ letter_to_pattern$:
 	sub r0, #65
 	lsl r0, #2				// multiply offset by 4 (bytes)
 	// r0 now contains the offset of the (upper case) letter from 'A'
-	ldr r1, =letter_a		// address of letter_a in r1
+	ldr r1, =letters		// address of letters in r1
 	add r1, r0				// move forward by offset r0
 	ldr r0, [r1]			// and return value
 
