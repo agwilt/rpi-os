@@ -1,5 +1,7 @@
 # ServOS
 
+[![Join the chat at https://gitter.im/agwilt/rpi-os](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/agwilt/rpi-os?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A bare metal system to (ultimately) control servos, though at the moment it can only do stuff like blink and morse.
 
 For now, I'm assuming a Raspberry Pi B+, though I'll try to make this portable later.
