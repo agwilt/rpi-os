@@ -63,7 +63,8 @@ $(NM): $(ELF)
 
 
 # OTHERS
-#---------------
+#===================
+
 # Clean up everything
 clean:
 	rm -f $(LIST) $(MAP) $(TARGET)
