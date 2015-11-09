@@ -37,45 +37,38 @@ ldr r4, =150000				// base duration
 loop$:
 	// a
 	mov r0, #65
-	bl letter_to_pattern$
 	mov r1, r4
-	bl misc_morse_pattern
+	bl morse
 
 	// n
 	mov r0, #78
-	bl letter_to_pattern$
 	mov r1, r4
-	bl misc_morse_pattern
+	bl morse
 
 	// d
 	mov r0, #68
-	bl letter_to_pattern$
 	mov r1, r4
-	bl misc_morse_pattern
+	bl morse
 
 	// r
 	mov r0, #82
-	bl letter_to_pattern$
 	mov r1, r4
-	bl misc_morse_pattern
+	bl morse
 
 	// e
 	mov r0, #69
-	bl letter_to_pattern$
 	mov r1, r4
-	bl misc_morse_pattern
+	bl morse
 
 	// a
 	mov r0, #65
-	bl letter_to_pattern$
 	mov r1, r4
-	bl misc_morse_pattern
+	bl morse
 
 	// s
 	mov r0, #83
-	bl letter_to_pattern$
 	mov r1, r4
-	bl misc_morse_pattern
+	bl morse
 
 	// and pause
 	add r0, r4, r4, lsl #1
@@ -84,7 +77,8 @@ loop$:
 
 	b loop$
 
-letter_to_pattern$:
+.globl letter_to_pattern
+letter_to_pattern:
 	// r0: ascii code for letter
 	// This function takes a letter and translates it to an pattern for misc_morse_pattern
 
@@ -105,6 +99,20 @@ letter_to_pattern$:
 
 	// return
 	mov pc, lr
+
+.globl morse
+morse:
+	// r0: letter
+	// r1: duration
+	push {lr}
+	push {r1}
+
+	bl letter_to_pattern
+
+	pop {r1}
+	bl misc_morse_pattern
+
+	pop {pc}
 
 .section .data
 

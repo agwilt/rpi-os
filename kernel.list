@@ -131,134 +131,135 @@ Disassembly of section .text:
     8184:	e3a0002f 	mov	r0, #47	; 0x2f
     8188:	e3a01000 	mov	r1, #0
     818c:	ebffffb9 	bl	8078 <gpio_output>
-    8190:	e59f40ac 	ldr	r4, [pc, #172]	; 8244 <letter_to_pattern$+0x30>
+    8190:	e59f40a8 	ldr	r4, [pc, #168]	; 8240 <morse+0x18>
 
 00008194 <loop$>:
     8194:	e3a00041 	mov	r0, #65	; 0x41
-    8198:	eb00001d 	bl	8214 <letter_to_pattern$>
-    819c:	e1a01004 	mov	r1, r4
-    81a0:	ebffffd0 	bl	80e8 <misc_morse_pattern>
-    81a4:	e3a0004e 	mov	r0, #78	; 0x4e
-    81a8:	eb000019 	bl	8214 <letter_to_pattern$>
-    81ac:	e1a01004 	mov	r1, r4
-    81b0:	ebffffcc 	bl	80e8 <misc_morse_pattern>
-    81b4:	e3a00044 	mov	r0, #68	; 0x44
-    81b8:	eb000015 	bl	8214 <letter_to_pattern$>
+    8198:	e1a01004 	mov	r1, r4
+    819c:	eb000021 	bl	8228 <morse>
+    81a0:	e3a0004e 	mov	r0, #78	; 0x4e
+    81a4:	e1a01004 	mov	r1, r4
+    81a8:	eb00001e 	bl	8228 <morse>
+    81ac:	e3a00044 	mov	r0, #68	; 0x44
+    81b0:	e1a01004 	mov	r1, r4
+    81b4:	eb00001b 	bl	8228 <morse>
+    81b8:	e3a00052 	mov	r0, #82	; 0x52
     81bc:	e1a01004 	mov	r1, r4
-    81c0:	ebffffc8 	bl	80e8 <misc_morse_pattern>
-    81c4:	e3a00052 	mov	r0, #82	; 0x52
-    81c8:	eb000011 	bl	8214 <letter_to_pattern$>
-    81cc:	e1a01004 	mov	r1, r4
-    81d0:	ebffffc4 	bl	80e8 <misc_morse_pattern>
-    81d4:	e3a00045 	mov	r0, #69	; 0x45
-    81d8:	eb00000d 	bl	8214 <letter_to_pattern$>
-    81dc:	e1a01004 	mov	r1, r4
-    81e0:	ebffffc0 	bl	80e8 <misc_morse_pattern>
-    81e4:	e3a00041 	mov	r0, #65	; 0x41
-    81e8:	eb000009 	bl	8214 <letter_to_pattern$>
-    81ec:	e1a01004 	mov	r1, r4
-    81f0:	ebffffbc 	bl	80e8 <misc_morse_pattern>
-    81f4:	e3a00053 	mov	r0, #83	; 0x53
-    81f8:	eb000005 	bl	8214 <letter_to_pattern$>
-    81fc:	e1a01004 	mov	r1, r4
-    8200:	ebffffb8 	bl	80e8 <misc_morse_pattern>
-    8204:	e0840084 	add	r0, r4, r4, lsl #1
-    8208:	e1a00080 	lsl	r0, r0, #1
-    820c:	ebffff7c 	bl	8004 <st_sleep>
-    8210:	eaffffdf 	b	8194 <loop$>
+    81c0:	eb000018 	bl	8228 <morse>
+    81c4:	e3a00045 	mov	r0, #69	; 0x45
+    81c8:	e1a01004 	mov	r1, r4
+    81cc:	eb000015 	bl	8228 <morse>
+    81d0:	e3a00041 	mov	r0, #65	; 0x41
+    81d4:	e1a01004 	mov	r1, r4
+    81d8:	eb000012 	bl	8228 <morse>
+    81dc:	e3a00053 	mov	r0, #83	; 0x53
+    81e0:	e1a01004 	mov	r1, r4
+    81e4:	eb00000f 	bl	8228 <morse>
+    81e8:	e0840084 	add	r0, r4, r4, lsl #1
+    81ec:	e1a00080 	lsl	r0, r0, #1
+    81f0:	ebffff83 	bl	8004 <st_sleep>
+    81f4:	eaffffe6 	b	8194 <loop$>
 
-00008214 <letter_to_pattern$>:
-    8214:	e3500061 	cmp	r0, #97	; 0x61
-    8218:	a2400020 	subge	r0, r0, #32
-    821c:	e350005a 	cmp	r0, #90	; 0x5a
-    8220:	c1a0f00e 	movgt	pc, lr
-    8224:	e2500041 	subs	r0, r0, #65	; 0x41
-    8228:	41a0f00e 	movmi	pc, lr
-    822c:	e2400041 	sub	r0, r0, #65	; 0x41
-    8230:	e1a00100 	lsl	r0, r0, #2
-    8234:	e59f100c 	ldr	r1, [pc, #12]	; 8248 <letter_to_pattern$+0x34>
-    8238:	e0811000 	add	r1, r1, r0
-    823c:	e5910000 	ldr	r0, [r1]
-    8240:	e1a0f00e 	mov	pc, lr
-    8244:	000249f0 	strdeq	r4, [r2], -r0
-    8248:	0000824c 	andeq	r8, r0, ip, asr #4
+000081f8 <letter_to_pattern>:
+    81f8:	e3500061 	cmp	r0, #97	; 0x61
+    81fc:	a2400020 	subge	r0, r0, #32
+    8200:	e350005a 	cmp	r0, #90	; 0x5a
+    8204:	c1a0f00e 	movgt	pc, lr
+    8208:	e2500041 	subs	r0, r0, #65	; 0x41
+    820c:	41a0f00e 	movmi	pc, lr
+    8210:	e2400041 	sub	r0, r0, #65	; 0x41
+    8214:	e1a00100 	lsl	r0, r0, #2
+    8218:	e59f1024 	ldr	r1, [pc, #36]	; 8244 <morse+0x1c>
+    821c:	e0811000 	add	r1, r1, r0
+    8220:	e5910000 	ldr	r0, [r1]
+    8224:	e1a0f00e 	mov	pc, lr
+
+00008228 <morse>:
+    8228:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+    822c:	e52d1004 	push	{r1}		; (str r1, [sp, #-4]!)
+    8230:	ebfffff0 	bl	81f8 <letter_to_pattern>
+    8234:	e49d1004 	pop	{r1}		; (ldr r1, [sp], #4)
+    8238:	ebffffaa 	bl	80e8 <misc_morse_pattern>
+    823c:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+    8240:	000249f0 	strdeq	r4, [r2], -r0
+    8244:	00008248 	andeq	r8, r0, r8, asr #4
 
 Disassembly of section .data:
 
-0000824c <letter_a>:
-    824c:	0000000d 	andeq	r0, r0, sp
+00008248 <letter_a>:
+    8248:	0000000d 	andeq	r0, r0, sp
 
-00008250 <letter_b>:
-    8250:	00000057 	andeq	r0, r0, r7, asr r0
+0000824c <letter_b>:
+    824c:	00000057 	andeq	r0, r0, r7, asr r0
 
-00008254 <letter_c>:
-    8254:	00000077 	andeq	r0, r0, r7, ror r0
+00008250 <letter_c>:
+    8250:	00000077 	andeq	r0, r0, r7, ror r0
 
-00008258 <letter_d>:
-    8258:	00000017 	andeq	r0, r0, r7, lsl r0
+00008254 <letter_d>:
+    8254:	00000017 	andeq	r0, r0, r7, lsl r0
 
-0000825c <letter_e>:
-    825c:	00000001 	andeq	r0, r0, r1
+00008258 <letter_e>:
+    8258:	00000001 	andeq	r0, r0, r1
 
-00008260 <letter_f>:
-    8260:	00000075 	andeq	r0, r0, r5, ror r0
+0000825c <letter_f>:
+    825c:	00000075 	andeq	r0, r0, r5, ror r0
 
-00008264 <letter_g>:
-    8264:	0000001f 	andeq	r0, r0, pc, lsl r0
+00008260 <letter_g>:
+    8260:	0000001f 	andeq	r0, r0, pc, lsl r0
 
-00008268 <letter_h>:
-    8268:	00000055 	andeq	r0, r0, r5, asr r0
+00008264 <letter_h>:
+    8264:	00000055 	andeq	r0, r0, r5, asr r0
 
-0000826c <letter_i>:
-    826c:	00000005 	andeq	r0, r0, r5
+00008268 <letter_i>:
+    8268:	00000005 	andeq	r0, r0, r5
 
-00008270 <letter_j>:
-    8270:	000000fd 	strdeq	r0, [r0], -sp
+0000826c <letter_j>:
+    826c:	000000fd 	strdeq	r0, [r0], -sp
 
-00008274 <letter_k>:
-    8274:	00000037 	andeq	r0, r0, r7, lsr r0
+00008270 <letter_k>:
+    8270:	00000037 	andeq	r0, r0, r7, lsr r0
 
-00008278 <letter_l>:
-    8278:	0000005d 	andeq	r0, r0, sp, asr r0
+00008274 <letter_l>:
+    8274:	0000005d 	andeq	r0, r0, sp, asr r0
 
-0000827c <letter_m>:
-    827c:	0000000f 	andeq	r0, r0, pc
+00008278 <letter_m>:
+    8278:	0000000f 	andeq	r0, r0, pc
 
-00008280 <letter_n>:
-    8280:	00000007 	andeq	r0, r0, r7
+0000827c <letter_n>:
+    827c:	00000007 	andeq	r0, r0, r7
 
-00008284 <letter_o>:
-    8284:	0000003f 	andeq	r0, r0, pc, lsr r0
+00008280 <letter_o>:
+    8280:	0000003f 	andeq	r0, r0, pc, lsr r0
 
-00008288 <letter_p>:
-    8288:	0000007d 	andeq	r0, r0, sp, ror r0
+00008284 <letter_p>:
+    8284:	0000007d 	andeq	r0, r0, sp, ror r0
 
-0000828c <letter_q>:
-    828c:	000000df 	ldrdeq	r0, [r0], -pc	; <UNPREDICTABLE>
+00008288 <letter_q>:
+    8288:	000000df 	ldrdeq	r0, [r0], -pc	; <UNPREDICTABLE>
 
-00008290 <letter_r>:
-    8290:	0000001d 	andeq	r0, r0, sp, lsl r0
+0000828c <letter_r>:
+    828c:	0000001d 	andeq	r0, r0, sp, lsl r0
 
-00008294 <letter_s>:
-    8294:	00000015 	andeq	r0, r0, r5, lsl r0
+00008290 <letter_s>:
+    8290:	00000015 	andeq	r0, r0, r5, lsl r0
 
-00008298 <letter_t>:
-    8298:	00000003 	andeq	r0, r0, r3
+00008294 <letter_t>:
+    8294:	00000003 	andeq	r0, r0, r3
 
-0000829c <letter_u>:
-    829c:	00000035 	andeq	r0, r0, r5, lsr r0
+00008298 <letter_u>:
+    8298:	00000035 	andeq	r0, r0, r5, lsr r0
 
-000082a0 <letter_v>:
-    82a0:	000000d5 	ldrdeq	r0, [r0], -r5
+0000829c <letter_v>:
+    829c:	000000d5 	ldrdeq	r0, [r0], -r5
 
-000082a4 <letter_w>:
-    82a4:	0000003d 	andeq	r0, r0, sp, lsr r0
+000082a0 <letter_w>:
+    82a0:	0000003d 	andeq	r0, r0, sp, lsr r0
 
-000082a8 <letter_x>:
-    82a8:	000000d7 	ldrdeq	r0, [r0], -r7
+000082a4 <letter_x>:
+    82a4:	000000d7 	ldrdeq	r0, [r0], -r7
 
-000082ac <letter_y>:
-    82ac:	000000f7 	strdeq	r0, [r0], -r7
+000082a8 <letter_y>:
+    82a8:	000000f7 	strdeq	r0, [r0], -r7
 
-000082b0 <letter_z>:
-    82b0:	0000005f 	andeq	r0, r0, pc, asr r0
+000082ac <letter_z>:
+    82ac:	0000005f 	andeq	r0, r0, pc, asr r0

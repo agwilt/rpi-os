@@ -31,7 +31,7 @@ LOAD tmp/main.o
  .init          0x0000000000008000        0x4 tmp/main.o
                 0x0000000000008000                _start
 
-.text           0x0000000000008004      0x248
+.text           0x0000000000008004      0x244
  *(.text)
  .text          0x0000000000008004       0x30 tmp/timer.o
                 0x0000000000008004                st_sleep
@@ -42,14 +42,16 @@ LOAD tmp/main.o
                 0x00000000000080b0                gpio_blink
  .text          0x00000000000080e8       0x74 tmp/misc.o
                 0x00000000000080e8                misc_morse_pattern
- .text          0x000000000000815c       0xf0 tmp/main.o
+ .text          0x000000000000815c       0xec tmp/main.o
+                0x00000000000081f8                letter_to_pattern
+                0x0000000000008228                morse
 
-.data           0x000000000000824c       0x68
+.data           0x0000000000008248       0x68
  *(.data)
- .data          0x000000000000824c        0x0 tmp/timer.o
- .data          0x000000000000824c        0x0 tmp/gpio.o
- .data          0x000000000000824c        0x0 tmp/misc.o
- .data          0x000000000000824c       0x68 tmp/main.o
+ .data          0x0000000000008248        0x0 tmp/timer.o
+ .data          0x0000000000008248        0x0 tmp/gpio.o
+ .data          0x0000000000008248        0x0 tmp/misc.o
+ .data          0x0000000000008248       0x68 tmp/main.o
 
 /DISCARD/
  *(*)
