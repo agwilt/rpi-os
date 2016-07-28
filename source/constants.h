@@ -43,6 +43,7 @@
 
 //Timer
 #ifdef RPI2
+	// no idea where the timer actually is on Pi 2
 	#define ST_BASE			0x20003000		// base timer address
 	#define ST_CL			0x20003004		// counter
 	#define ST_CL1			0x20003008
